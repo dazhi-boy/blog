@@ -1,13 +1,6 @@
+server:
+  port: 8081
+
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: baidu
-          uri: https://example.org
-          predicates:
-            - Path=/red
-        - id: consumer
-          uri: http://localhost:8070/demo/1
-          predicates:
-            - Before=2021-01-20T17:42:47.789-07:00[America/Denver]
-            - Path=/demo/{string}
+  application:
+    name: base-provider

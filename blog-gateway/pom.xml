@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.dazhi</groupId>
-    <artifactId>base-provider</artifactId>
+    <artifactId>blog-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>base-provider</name>
+    <name>blog-gateway</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -21,8 +21,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
         <dependency>
