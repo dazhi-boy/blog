@@ -2,8 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: base-provider
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,3 +12,11 @@ spring:
     username: root
     password: root
     platform: mysql
+
+  application:
+    name: base-provider
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 154.8.146.181:8848
