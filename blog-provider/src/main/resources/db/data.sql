@@ -1,5 +1,5 @@
 /*mock data***/
-INSERT INTO user (username, password)
+INSERT INTO theme (name, description)
 VALUES
-('admin', '123'),
-('password', '123');
+('旅游', '这是旅游专栏'),
+('活动', '大家一起嗨');

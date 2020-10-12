@@ -12,5 +12,20 @@ spring:
     data: classpath:db/data.sql
     url: jdbc:mysql://154.8.146.181:3306/blog?characterEncoding=UTF8
     username: root
-    password: root
+    password: zxcv1234
     platform: mysql
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 154.8.146.181:8848
+    sentinel:
+      transport:
+        dashboard: http://154.8.146.181:8080
+        port: 8791
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

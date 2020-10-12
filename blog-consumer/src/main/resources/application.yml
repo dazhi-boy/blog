@@ -4,3 +4,8 @@ server:
 spring:
   application:
     name: blog-consumer
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 154.8.146.181:8848
