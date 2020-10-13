@@ -9,3 +9,14 @@ spring:
     nacos:
       discovery:
         server-addr: 154.8.146.181:8848
+
+    sentinel:
+      transport:
+        dashboard: http://154.8.146.181:8080
+        port: 8791
+
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: '*'

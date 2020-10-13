@@ -30,14 +30,14 @@ public class BaseController<T,E extends IService<T>> {
         return Result.ok("OK", res);
     }
 
-    @ApiOperation(value = "更新用户")
+    @ApiOperation(value = "更新")
     @PutMapping
     public Result update(@RequestBody T t) {
         boolean res = iService.updateById(t);
         return Result.ok("OK", res);
     }
 
-    @ApiOperation(value = "通过id删除指定用户")
+    @ApiOperation(value = "通过id删除指定数据")
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable("id") Long id) {
         boolean res = iService.removeById(id);
