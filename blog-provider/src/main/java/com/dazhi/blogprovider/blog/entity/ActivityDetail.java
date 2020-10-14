@@ -6,14 +6,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
- * 景区图文介绍
+ * 活动图文介绍
  * </p>
  *
  * @author dazhi
- * @since 2020-10-13
+ * @since 2020-10-14
  */
-@ApiModel(value="AttractionsDetail对象", description="景区图文介绍")
-public class AttractionsDetail extends BaseEntity {
+@ApiModel(value="ActivityDetail对象", description="活动图文介绍")
+public class ActivityDetail extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,8 +26,8 @@ public class AttractionsDetail extends BaseEntity {
     @ApiModelProperty(value = "描述")
     private String description;
 
-    @ApiModelProperty(value = "景区id")
-    private Long attractionsId;
+    @ApiModelProperty(value = "活动id")
+    private Long activityId;
 
     public String getName() {
         return name;
@@ -36,7 +36,6 @@ public class AttractionsDetail extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-
     public String getImage() {
         return image;
     }
@@ -51,12 +50,21 @@ public class AttractionsDetail extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Long getAttractionsId() {
-        return attractionsId;
+    public Long getActivityId() {
+        return activityId;
     }
 
-    public void setAttractionsId(Long attractionsId) {
-        this.attractionsId = attractionsId;
+    public void setActivityId(Long activityId) {
+        this.activityId = activityId;
     }
 
+    @Override
+    public String toString() {
+        return "ActivityDetail{" +
+            "name=" + name +
+            ", image=" + image +
+            ", description=" + description +
+            ", activityId=" + activityId +
+        "}";
+    }
 }

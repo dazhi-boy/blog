@@ -25,6 +25,9 @@ spring:
         port: 8791
         clientIp: 192.168.2.120
 
+  mvc:
+    static-path-pattern=/static/*:
+
 management:
   endpoints:
     web:

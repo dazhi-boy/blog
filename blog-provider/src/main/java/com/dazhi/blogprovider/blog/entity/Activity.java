@@ -4,19 +4,16 @@ import com.dazhi.blogprovider.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <p>
  * 景区列表
  * </p>
  *
  * @author dazhi
- * @since 2020-10-13
+ * @since 2020-10-14
  */
-@ApiModel(value="Attractions对象", description="景区列表")
-public class Attractions extends BaseEntity {
+@ApiModel(value="Activity对象", description="景区列表")
+public class Activity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,14 +32,14 @@ public class Attractions extends BaseEntity {
     @ApiModelProperty(value = "主题id")
     private Long themeId;
 
-    @ApiModelProperty(value = "用户id")
+    @ApiModelProperty(value = "所属用户id")
     private Long userId;
 
     @ApiModelProperty(value = "经度")
-    private String longitude;
+    private Long longitude;
 
     @ApiModelProperty(value = "纬度")
-    private String latitude;
+    private Long latitude;
 
     @ApiModelProperty(value = "省")
     private String province;
@@ -50,8 +47,14 @@ public class Attractions extends BaseEntity {
     @ApiModelProperty(value = "市")
     private String city;
 
-    @ApiModelProperty(value = "图片和介绍明细")
-    private List<AttractionsDetail> attractionsDetailList = new ArrayList<>();
+    @ApiModelProperty(value = "创建时间")
+    private String createTime;
+
+    @ApiModelProperty(value = "活动开始时间")
+    private String beginTime;
+
+    @ApiModelProperty(value = "活动结束时间")
+    private String endTime;
 
     public String getName() {
         return name;
@@ -88,7 +91,6 @@ public class Attractions extends BaseEntity {
     public void setThemeId(Long themeId) {
         this.themeId = themeId;
     }
-
     public Long getUserId() {
         return userId;
     }
@@ -96,23 +98,20 @@ public class Attractions extends BaseEntity {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-
-    public String getLongitude() {
+    public Long getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Long longitude) {
         this.longitude = longitude;
     }
-
-    public String getLatitude() {
+    public Long getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Long latitude) {
         this.latitude = latitude;
     }
-
     public String getProvince() {
         return province;
     }
@@ -120,7 +119,6 @@ public class Attractions extends BaseEntity {
     public void setProvince(String province) {
         this.province = province;
     }
-
     public String getCity() {
         return city;
     }
@@ -128,13 +126,44 @@ public class Attractions extends BaseEntity {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public List<AttractionsDetail> getAttractionsDetailList() {
-        return attractionsDetailList;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setAttractionsDetailList(List<AttractionsDetail> attractionsDetailList) {
-        this.attractionsDetailList = attractionsDetailList;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+    public String getBeginTime() {
+        return beginTime;
     }
 
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+            "name=" + name +
+            ", keywords=" + keywords +
+            ", image=" + image +
+            ", description=" + description +
+            ", themeId=" + themeId +
+            ", userId=" + userId +
+            ", longitude=" + longitude +
+            ", latitude=" + latitude +
+            ", province=" + province +
+            ", city=" + city +
+            ", createTime=" + createTime +
+            ", beginTime=" + beginTime +
+            ", endTime=" + endTime +
+        "}";
+    }
 }
