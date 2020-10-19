@@ -12,14 +12,15 @@
 </template>
 <script>
 export default {
-  name: "test",
-  data() {
+  name: 'test',
+  data () {
     return {
-      active: 1,
-    };
+      active: 1
+    }
   },
-  mounted: function () {},
-};
+  mounted: function () {}
+}
 </script>
 <style>
+
 </style>

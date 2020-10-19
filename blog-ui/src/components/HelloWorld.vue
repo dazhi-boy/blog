@@ -25,18 +25,18 @@
   </div>
 </template>
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
   components: {
     swiper,
-    swiperSlide,
+    swiperSlide
   },
-  data() {
+  data () {
     return {
       active: 0,
-      msg: "Welcome to Your Vue.js App zjg",
+      msg: 'Welcome to Your Vue.js App zjg',
       activity: [],
       slide: [],
       swiperOption: {
@@ -47,10 +47,10 @@ export default {
         on: {
           click: function () {
             // const realIndex = this.realIndex;
-          },
-        },
-      },
-    };
+          }
+        }
+      }
+    }
   },
   // components: {
   //   swiper,
@@ -58,17 +58,17 @@ export default {
   // },
   mounted: function () {
     this.$axios
-      .get("/blog/activity")
+      .get('/blog/activity')
       .then((res) => {
-        console.log(res.data);
-        this.activity = res.data.data.records;
-        this.slide = res.data.data.records;
+        console.log(res.data)
+        this.activity = res.data.data.records
+        this.slide = res.data.data.records
       })
       .catch((err) => {
-        console.log(err.response);
-      });
-  },
-};
+        console.log(err.response)
+      })
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
