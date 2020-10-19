@@ -4,6 +4,7 @@ package com.dazhi.blogprovider.blog.controller;
 import com.dazhi.blogprovider.blog.entity.Activity;
 import com.dazhi.blogprovider.blog.service.IActivityService;
 import com.dazhi.blogprovider.common.BaseController;
+import com.dazhi.blogprovider.common.Result;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
