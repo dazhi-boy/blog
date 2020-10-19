@@ -1,5 +1,6 @@
 package com.dazhi.blogprovider.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dazhi.blogprovider.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -51,6 +52,7 @@ public class Attractions extends BaseEntity {
     private String city;
 
     @ApiModelProperty(value = "图片和介绍明细")
+    @TableField(exist = false)
     private List<AttractionsDetail> attractionsDetailList = new ArrayList<>();
 
     public String getName() {

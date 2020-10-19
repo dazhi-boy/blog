@@ -1,7 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <div>
+      <swiper :options="swiperOption">
+          <swiper-slide class="swiper-slide" v-for="(item,index) in slide" :key="index">
+            <img :src="item.image"/>
+                slide{{item}}
+          </swiper-slide>
+      </swiper>
+    </div>
     <ul>
       <li>
         <a
@@ -27,69 +34,51 @@
           Community Chat
         </a>
       </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
     </ul>
   </div>
 </template>
-
 <script>
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 export default {
   name: 'HelloWorld',
+  components: {
+    swiper,
+    swiperSlide
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      activity: [],
+      slide: [],
+      swiperOption: {
+        centeredSlides: true,
+        loop: true,
+        initialSlide: 1,
+        spaceBetween: 15,
+        on: {
+          click: function () {
+            // const realIndex = this.realIndex;
+          }
+        }
+      }
     }
+  },
+  // components: {
+  //   swiper,
+  //   swiperSlide
+  // },
+  mounted: function () {
+    this.$axios
+      .get('/blog/activity')
+      .then(res => {
+        console.log(res.data)
+        this.activity = res.data.data.records
+        this.slide = res.data.data.records
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   }
 }
 </script>
@@ -109,5 +98,13 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.swiper-slide{
+  height: 450px;
+  background:cadetblue;
+  font-size: 50px;
+  text-align: center;
+  line-height: 450px;
 }
 </style>
