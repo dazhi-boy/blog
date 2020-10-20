@@ -3,10 +3,9 @@
     test.vue
 
     <van-tabbar v-model="active">
-      <van-tabbar-item to="/" icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item to="/test" icon="search">标签</van-tabbar-item>
-      <van-tabbar-item to="/" icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item to="/test" icon="setting-o">标签</van-tabbar-item>
+      <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item to="/test" icon="add-o">添加</van-tabbar-item>
+      <van-tabbar-item to="/" icon="friends-o">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

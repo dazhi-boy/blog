@@ -56,7 +56,8 @@ CREATE TABLE `activity` (
  `city` varchar(20) NOT NULL COMMENT '市',
  `create_time` varchar(20) NOT NULL COMMENT '创建时间',
  `begin_time` varchar(20) NOT NULL COMMENT '活动开始时间',
- `end_time` varchar(20) NOT NULL COMMENT '活动结束时间'
+ `end_time` varchar(20) NOT NULL COMMENT '活动结束时间',
+ `star` bigint(20) COMMENT '是否推荐'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '景区列表';
 
 -- 景区图文介绍

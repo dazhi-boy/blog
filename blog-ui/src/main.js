@@ -8,7 +8,7 @@ import 'vant/lib/index.css'
 Vue.config.productionTip = false
 // Vue.use(axios)
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = '/blog'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 Vue.use(Vant)
