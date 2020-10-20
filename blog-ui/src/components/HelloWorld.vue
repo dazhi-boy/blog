@@ -1,13 +1,47 @@
 <template>
   <div class="hello">
-    <van-cell title="北京" icon="location-o" />
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in slide" :key="index">
-        <img class="img" :src="item.image" />
-      </van-swipe-item>
-    </van-swipe>
-    <!-- <van-button type="primary">主要按钮</van-button> -->
-
+    <!-- 当前位置和搜索框 -->
+    <van-row>
+      <van-col span="6">
+        <van-cell title="北京" icon="location-o" />
+      </van-col>
+      <van-col span="18">
+        <form action="/">
+          <van-search
+            v-model="value"
+            show-action
+            placeholder="请输入搜索关键词"
+            @search="onSearch"
+            @cancel="onCancel"
+          />
+        </form>
+      </van-col>
+    </van-row>
+    <!-- 热门活动和轮播图 -->
+    <div>
+      <van-row>
+        <van-col span="6">
+          <span>热门活动</span>
+        </van-col>
+        <van-col span="6" offset="12">
+          <span>更多>>></span>
+        </van-col>
+      </van-row>
+      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+        <van-swipe-item v-for="(item, index) in slide" :key="index">
+          <img class="img" :src="item.image" />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    <!-- 攻略 -->
+    <van-row>
+      <van-col span="6">
+        <span>溜达攻略</span>
+      </van-col>
+      <van-col span="6" offset="12">
+        <span>更多>>></span>
+      </van-col>
+    </van-row>
     <van-grid :column-num="2">
       <van-grid-item
         v-for="item in attractions"
@@ -68,6 +102,14 @@ export default {
         console.log('User', activityResp.data.data.records)
         console.log('Repositories', attractionsResp.data)
       }))
+  },
+  methods: {
+    onSearch (val) {
+      console.log(val)
+    },
+    onCancel () {
+      console.log('取消')
+    }
   }
 }
 </script>
@@ -108,5 +150,8 @@ a {
 .my-swipe .img {
   width: auto;
   height: 150px;
+}
+.search-field {
+  border-bottom: 1px solid #000;
 }
 </style>
