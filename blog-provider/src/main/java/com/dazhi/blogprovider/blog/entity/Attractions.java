@@ -40,10 +40,10 @@ public class Attractions extends BaseEntity {
     private Long userId;
 
     @ApiModelProperty(value = "经度")
-    private String longitude;
+    private Long longitude;
 
     @ApiModelProperty(value = "纬度")
-    private String latitude;
+    private Long latitude;
 
     @ApiModelProperty(value = "省")
     private String province;
@@ -99,19 +99,19 @@ public class Attractions extends BaseEntity {
         this.userId = userId;
     }
 
-    public String getLongitude() {
+    public Long getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Long longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public Long getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Long latitude) {
         this.latitude = latitude;
     }
 

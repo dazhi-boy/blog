@@ -54,9 +54,9 @@ CREATE TABLE `activity` (
  `latitude` bigint(20) NOT NULL COMMENT '纬度',
  `province` varchar(20) NOT NULL COMMENT '省',
  `city` varchar(20) NOT NULL COMMENT '市',
- `create_time` varchar(20) NOT NULL COMMENT '创建时间',
- `begin_time` varchar(20) NOT NULL COMMENT '活动开始时间',
- `end_time` varchar(20) NOT NULL COMMENT '活动结束时间',
+ `create_time` varchar(20) COMMENT '创建时间',
+ `begin_time` varchar(20) COMMENT '活动开始时间',
+ `end_time` varchar(20) COMMENT '活动结束时间',
  `star` bigint(20) COMMENT '是否推荐'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '景区列表';
 

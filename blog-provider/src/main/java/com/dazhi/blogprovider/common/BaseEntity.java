@@ -2,11 +2,14 @@ package com.dazhi.blogprovider.common;
 
 import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class BaseEntity {
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
     @Version
     private Integer version;

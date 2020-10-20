@@ -1,10 +1,16 @@
 package com.dazhi.blogprovider.blog.service.impl;
 
 import com.dazhi.blogprovider.blog.entity.Attractions;
+import com.dazhi.blogprovider.blog.entity.AttractionsDetail;
+import com.dazhi.blogprovider.blog.mapper.AttractionsDetailMapper;
 import com.dazhi.blogprovider.blog.mapper.AttractionsMapper;
 import com.dazhi.blogprovider.blog.service.IAttractionsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
