@@ -1,6 +1,6 @@
 <template>
     <div>
-      这个是活动详情
+      这个是列表
       <van-card
         v-for="item in mydata"
         :key="item.id"
@@ -32,15 +32,9 @@ export default {
   },
   methods: {
     detail (id) {
-      console.log(id)
-      this.$axios.get(`/activity/1/info`)
-        .then(resp => {
-          // this.mydata = resp.data.data.records
-          console.log(resp.data.data.records)
-        })
-        .catch(function (error) { // 请求失败处理
-          console.log(error)
-        })
+      this.$router.push({
+        path: `/detail/${id}`
+      })
     }
   }
 }
