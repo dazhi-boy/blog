@@ -24,7 +24,7 @@
           <span>热门活动</span>
         </van-col>
         <van-col span="6" offset="12">
-          <span>更多>>></span>
+          <van-cell title="更多" is-link to="list" />
         </van-col>
       </van-row>
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
@@ -53,12 +53,6 @@
       <van-field v-text="item.description" />
       </van-grid-item>
     </van-grid>
-
-    <van-tabbar v-model="active">
-      <van-tabbar-item to="/" icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item to="/test" icon="add-o">添加</van-tabbar-item>
-      <van-tabbar-item to="/" icon="friends-o">我的</van-tabbar-item>
-    </van-tabbar>
   </div>
 </template>
 <script>
@@ -73,6 +67,7 @@ export default {
   data () {
     return {
       active: 0,
+      value: '',
       msg: 'Welcome to Your Vue.js App zjg',
       attractions: [],
       slide: [],

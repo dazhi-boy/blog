@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IActivityService extends IService<Activity> {
 
+    public Activity getByIdWithDetail(Long id);
 }

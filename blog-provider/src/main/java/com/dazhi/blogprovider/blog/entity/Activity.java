@@ -1,8 +1,12 @@
 package com.dazhi.blogprovider.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dazhi.blogprovider.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -55,6 +59,10 @@ public class Activity extends BaseEntity {
 
     @ApiModelProperty(value = "活动结束时间")
     private String endTime;
+
+    @ApiModelProperty(value = "图片和介绍明细")
+    @TableField(exist = false)
+    private List<ActivityDetail> activityDetailList = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -148,22 +156,11 @@ public class Activity extends BaseEntity {
         this.endTime = endTime;
     }
 
-    @Override
-    public String toString() {
-        return "Activity{" +
-            "name=" + name +
-            ", keywords=" + keywords +
-            ", image=" + image +
-            ", description=" + description +
-            ", themeId=" + themeId +
-            ", userId=" + userId +
-            ", longitude=" + longitude +
-            ", latitude=" + latitude +
-            ", province=" + province +
-            ", city=" + city +
-            ", createTime=" + createTime +
-            ", beginTime=" + beginTime +
-            ", endTime=" + endTime +
-        "}";
+    public List<ActivityDetail> getDetails() {
+        return activityDetailList;
+    }
+
+    public void setDetails(List<ActivityDetail> activityDetailList) {
+        this.activityDetailList = activityDetailList;
     }
 }

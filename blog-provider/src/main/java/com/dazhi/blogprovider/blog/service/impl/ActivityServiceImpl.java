@@ -17,4 +17,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> implements IActivityService {
 
+    @Override
+    public Activity getByIdWithDetail(Long id) {
+        return this.baseMapper.getByIdWithDetail(id);
+    }
 }

@@ -2,6 +2,7 @@ package com.dazhi.blogprovider.blog.mapper;
 
 import com.dazhi.blogprovider.blog.entity.Activity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ActivityMapper extends BaseMapper<Activity> {
 
+    public Activity getByIdWithDetail(@Param("id") Long id);
 }

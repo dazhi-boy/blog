@@ -2,12 +2,17 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <router-view/>
+    <i-Bottom></i-Bottom>
   </div>
 </template>
 
 <script>
+import Bottom from '@/components/Bottom'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'i-Bottom': Bottom
+  }
 }
 </script>
 
