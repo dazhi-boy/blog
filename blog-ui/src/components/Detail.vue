@@ -1,11 +1,11 @@
 <template>
     <div>
-      <p>{{detail.name}}</p>
+      <h1>{{detail.name}}</h1>
       <van-image width="100" height="100" :src="detail.image" />
       <p>{{detail.description}}</p>
       <van-list v-for="item in detail.details"
       :key="item.id">
-      <p>{{item.name}}</p>
+      <h2>{{item.name}}</h2>
       <van-image width="100" height="100" :src="item.image" />
       <p>{{item.description}}</p>
       </van-list>
@@ -21,10 +21,11 @@ export default {
     }
   },
   mounted: function () {
-    this.$axios.get(`/activity/1/info`)
+    // console.log(id)
+    this.$axios.get(`/${this.$route.params.target}/${this.$route.params.id}/info`)
       .then(resp => {
         this.detail = resp.data.data
-        console.log(resp.data.data)
+        // console.log(resp.data.data)
       })
       .catch(function (error) { // 请求失败处理
         console.log(error)

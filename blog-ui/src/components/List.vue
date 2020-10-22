@@ -21,10 +21,10 @@ export default {
     }
   },
   mounted: function () {
-    this.$axios.get('/activity')
+    this.$axios.get(`/${this.$route.query.target}`)
       .then(resp => {
         this.mydata = resp.data.data.records
-        console.log(resp.data.data.records)
+        // console.log(resp.data.data.records)
       })
       .catch(function (error) { // 请求失败处理
         console.log(error)
@@ -33,7 +33,11 @@ export default {
   methods: {
     detail (id) {
       this.$router.push({
-        path: `/detail/${id}`
+        name: `Detail`,
+        params: {
+          id: id,
+          target: `${this.$route.query.target}`
+        }
       })
     }
   }

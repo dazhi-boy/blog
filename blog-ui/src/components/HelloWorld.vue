@@ -24,12 +24,12 @@
           <span>热门活动</span>
         </van-col>
         <van-col span="6" offset="12">
-          <van-cell title="更多" is-link to="list" />
+          <van-cell title="更多" is-link @click="getList('activity')" />
         </van-col>
       </van-row>
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(item, index) in slide" :key="index">
-          <img class="img" :src="item.image" />
+        <van-swipe-item v-for="(item, index) in slide" :key="index" @click="detail('activity',item.id)">
+          <img class="img" :src="item.image"/>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -39,7 +39,7 @@
         <span>溜达攻略</span>
       </van-col>
       <van-col span="6" offset="12">
-        <span>更多>>></span>
+        <van-cell title="更多" is-link @click="getList('attractions')" />
       </van-col>
     </van-row>
     <van-grid :column-num="2">
@@ -47,6 +47,7 @@
         v-for="item in attractions"
         :key="item.id"
         :text="item.name"
+        @click="detail('attractions',item.id)"
       >
       <van-image :src="item.image" />
       <van-field v-text="item.name" />
@@ -94,8 +95,8 @@ export default {
         // 上面两个请求都完成后，才执行这个回调方法
         _this.slide = activityResp.data.data.records
         _this.attractions = attractionsResp.data.data.records
-        console.log('User', activityResp.data.data.records)
-        console.log('Repositories', attractionsResp.data)
+        // console.log('User', activityResp.data.data.records)
+        // console.log('Repositories', attractionsResp.data)
       }))
   },
   methods: {
@@ -104,6 +105,23 @@ export default {
     },
     onCancel () {
       console.log('取消')
+    },
+    getList (target) {
+      this.$router.push({
+        name: 'List',
+        query: {
+          target: target
+        }
+      })
+    },
+    detail (target, id) {
+      this.$router.push({
+        name: 'Detail',
+        params: {
+          target: target,
+          id: id
+        }
+      })
     }
   }
 }
