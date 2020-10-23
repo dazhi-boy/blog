@@ -7,3 +7,9 @@ spring:
 
   mvc:
     static-path-pattern=/public/*:
+
+  resources:
+    static-locations:
+      - file:${upload-path}
+upload-path: D:/public/
+upload-ip: localhost

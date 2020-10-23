@@ -88,8 +88,8 @@ export default {
   mounted: function () {
     var _this = this
     this.$axios.all([
-      this.$axios.get('/activity'),
-      this.$axios.get('/attractions')
+      this.$axios.get('/blog/activity'),
+      this.$axios.get('/blog/attractions')
     ])
       .then(this.$axios.spread(function (activityResp, attractionsResp) {
         // 上面两个请求都完成后，才执行这个回调方法

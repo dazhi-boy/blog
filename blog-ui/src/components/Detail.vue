@@ -22,7 +22,7 @@ export default {
   },
   mounted: function () {
     // console.log(id)
-    this.$axios.get(`/${this.$route.params.target}/${this.$route.params.id}/info`)
+    this.$axios.get(`/blog/${this.$route.params.target}/${this.$route.params.id}/info`)
       .then(resp => {
         this.detail = resp.data.data
         // console.log(resp.data.data)

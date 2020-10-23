@@ -12,7 +12,7 @@
           />
           <van-field name="uploader" label="文件上传">
             <template #input>
-              <van-uploader v-model="uploader" />
+              <van-uploader v-model="uploader" :after-read="onRead"/>
             </template>
           </van-field>
           <van-field
@@ -22,6 +22,7 @@
             placeholder="描述"
             :rules="[{ required: true, message: '请填写描述' }]"
           />
+          <van-button type="primary" @click="addSub()">添加子主题</van-button>
           <div style="margin: 16px;">
             <van-button round block type="info" native-type="submit">
               提交
@@ -60,16 +61,33 @@ export default {
   name: 'Add',
   data () {
     return {
-      active: 1,
+      active: 0,
       name: '',
       description: '',
-      uploader: [{ url: 'https://img.yzcdn.cn/vant/leaf.jpg' }]
+      uploader: [],
+      image: ''
     }
   },
   mounted: function () {},
   methods: {
     onSubmit (values) {
       console.log('submit', values)
+    },
+    onRead (file) {
+      let formData = new FormData()
+      formData.append('file', file.file)
+      console.log(formData)
+      this.$axios.post('/upload', formData)
+        .then(resp => {
+          this.image = this.image + ',' + resp.data + ','
+          console.log(resp.data)
+        })
+        .catch(function (error) { // 请求失败处理
+          console.log(error)
+        })
+    },
+    addSub () {
+      console.log('添加子主题')
     }
   }
 }

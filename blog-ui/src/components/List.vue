@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted: function () {
-    this.$axios.get(`/${this.$route.query.target}`)
+    this.$axios.get(`/blog/${this.$route.query.target}`)
       .then(resp => {
         this.mydata = resp.data.data.records
         // console.log(resp.data.data.records)
