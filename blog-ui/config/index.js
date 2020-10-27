@@ -19,7 +19,7 @@ module.exports = {
         }
       },
       '/upload':{
-        target: "http://localhost:8090/upload",
+        target: "http://154.8.146.181:8090/upload",
         changeOrigin:true,
         pathRewrite:{
           '^/upload':''

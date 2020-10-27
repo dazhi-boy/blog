@@ -12,7 +12,7 @@
           />
           <van-field name="uploader" label="文件上传">
             <template #input>
-              <van-uploader v-model="uploader" :after-read="onRead"/>
+              <van-uploader v-model="uploader[10].uploader" :after-read="onRead"/>
             </template>
           </van-field>
           <van-field
@@ -31,9 +31,9 @@
               placeholder="子主题"
               :rules="[{ required: true, message: '请填写子主题' }]"
             />
-            <van-field name="uploader" label="文件上传">
+            <van-field name="item.image" label="文件上传">
               <template #input>
-                <van-uploader v-model="uploader" :after-read="onRead"/>
+                <van-uploader v-model="uploader[index].uploader" :after-read="onReadSub" name="index"/>
               </template>
             </van-field>
             <van-field
@@ -93,7 +93,19 @@ export default {
       },
       name: '',
       description: '',
-      uploader: [],
+      uploader: [
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []},
+        {uploader: []}
+      ],
       image: ''
     }
   },
@@ -103,10 +115,10 @@ export default {
       console.log('submit', values)
       console.log(this.repData)
     },
-    onRead (file) {
+    onRead (file, detail) {
       let formData = new FormData()
       formData.append('file', file.file)
-      console.log(formData)
+      // console.log(detail)
       this.$axios.post('/upload', formData)
         .then(resp => {
           this.image = this.image + ',' + resp.data + ','
@@ -117,12 +129,25 @@ export default {
           console.log(error)
         })
     },
+    onReadSub (file, detail) {
+      let formData = new FormData()
+      formData.append('file', file.file)
+      console.log(detail)
+      this.$axios.post('/upload', formData)
+        .then(resp => {
+          this.repData.detail[detail.index].image = resp.data
+        })
+        .catch(function (error) { // 请求失败处理
+          console.log(error)
+        })
+    },
     addSub () {
-      this.repData.detail.push({
-        name: '',
-        description: '',
-        image: ''
-      })
+      this.repData.detail
+        .push({
+          name: '',
+          description: '',
+          image: ''
+        })
       console.log('添加子主题')
     }
   }
