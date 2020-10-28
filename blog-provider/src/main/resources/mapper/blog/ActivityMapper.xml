@@ -9,10 +9,10 @@
     </resultMap>
 
     <select id="getByIdWithDetail" resultMap="Activity">
-        select * from attractions where id = #{id}
+        select * from activity where id = #{id}
     </select>
 
-    <select id="getDetail" parameterType="Long" resultType="com.dazhi.blogprovider.blog.entity.AttractionsDetail">
-        SELECT * FROM attractions_detail WHERE attractions_id=#{id}
+    <select id="getDetail" parameterType="Long" resultType="com.dazhi.blogprovider.blog.entity.ActivityDetail">
+        SELECT * FROM activity_detail WHERE activity_id=#{id}
     </select>
 </mapper>

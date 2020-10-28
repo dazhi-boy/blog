@@ -53,7 +53,7 @@ public class Attractions extends BaseEntity {
 
     @ApiModelProperty(value = "图片和介绍明细")
     @TableField(exist = false)
-    private List<AttractionsDetail> attractionsDetailList = new ArrayList<>();
+    private List<AttractionsDetail> details = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -131,12 +131,12 @@ public class Attractions extends BaseEntity {
         this.city = city;
     }
 
-    public List<AttractionsDetail> getAttractionsDetailList() {
-        return attractionsDetailList;
+    public List<AttractionsDetail> getDetails() {
+        return details;
     }
 
-    public void setAttractionsDetailList(List<AttractionsDetail> attractionsDetailList) {
-        this.attractionsDetailList = attractionsDetailList;
+    public void setDetails(List<AttractionsDetail> details) {
+        this.details = details;
     }
 
 }

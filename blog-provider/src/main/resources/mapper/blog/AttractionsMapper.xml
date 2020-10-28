@@ -5,7 +5,7 @@
     <!-- 使用resultMap映射实体类和字段之间的一一对应关系 -->
     <resultMap type="com.dazhi.blogprovider.blog.entity.Attractions" id="Attractions">
         <id property="id" column="id"/>
-        <collection property="attractionsDetailList" column="id" ofType="com.dazhi.blogprovider.blog.entity.AttractionsDetail" select="getDetail"/>
+        <collection property="details" column="id" ofType="com.dazhi.blogprovider.blog.entity.AttractionsDetail" select="getDetail"/>
     </resultMap>
 
     <select id="getByIdWithDetail" resultMap="Attractions">

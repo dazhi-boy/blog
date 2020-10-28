@@ -44,7 +44,7 @@ public class AttractionsController extends BaseController<Attractions, IAttracti
     @PostMapping
     public Result save(@RequestBody Attractions attractions) {
         boolean res = this.iService.save(attractions);
-        List<AttractionsDetail> details = attractions.getAttractionsDetailList();
+        List<AttractionsDetail> details = attractions.getDetails();
         for (AttractionsDetail detail : details){
             detail.setAttractionsId(attractions.getId());
             res = res && detailService.save(detail);
