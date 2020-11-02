@@ -4,7 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Add from '@/components/Add'
 import Me from '@/components/Me'
 import List from '@/components/List'
-import Detail from '@/components/detail'
+import Detail from '@/components/Detail'
+import Tutorial from '@/components/Tutorial'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/list',
       name: 'List',
       component: List
+    },
+    {
+      path: '/tutorial',
+      name: 'Tutorial',
+      component: Tutorial
     },
     {
       path: '/detail',

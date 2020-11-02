@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLogin === true">
+    <div v-if="chackIsLogin">
       <van-row>
         <van-col span="16">
           <h4>{{GLOBAL.localStorage.username}}</h4>
@@ -85,6 +85,11 @@ export default {
       isLogin: false
     }
   },
+  computed: {
+    chackIsLogin () {
+      return window.sessionStorage.getItem('isLogin')
+    }
+  },
   mounted: function () {
     console.log(window.sessionStorage.getItem('isLogin'))
 
@@ -101,7 +106,7 @@ export default {
         this.GLOBAL.localStorage.isLogin = true
         window.sessionStorage.setItem('username', this.username)
         window.sessionStorage.setItem('isLogin', true)
-        // this.isLogin = true
+        this.isLogin = true
         // this.$router.push({
         //   name: 'Me'
         // })
