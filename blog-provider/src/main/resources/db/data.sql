@@ -41,3 +41,11 @@ VALUES
 ('图2', 'http://154.8.146.181:8082/img/2.jpg', '凤凰岭是一座山，图2', 1),
 ('图1', 'http://154.8.146.181:8082/img/1.jpg', '慕田峪长城很好玩，图1', 2),
 ('图2', 'http://154.8.146.181:8082/img/2.jpg', '慕田峪长城很好玩，图2', 2);
+
+-- 景区图文介绍
+INSERT INTO tutorial_tv (name, image, tv, description, theme_id)
+VALUES
+('凤凰岭是一座山，图1', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '凤凰岭是一座山，图1', 1),
+('凤凰岭是一座山，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '凤凰岭是一座山，图2', 1),
+('慕田峪长城很好玩，图1', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图1', 2),
+('慕田峪长城很好玩，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图2', 2);

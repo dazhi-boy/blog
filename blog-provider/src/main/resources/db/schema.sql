@@ -135,3 +135,16 @@ CREATE TABLE `activity_detail` (
  `description` varchar(255) NOT NULL COMMENT '描述',
  `activity_id` bigint(20) NOT NULL COMMENT '活动id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '活动图文介绍';
+
+-- 教学视频
+DROP TABLE IF EXISTS `tutorial_tv`;
+CREATE TABLE `tutorial_tv` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `name` varchar(128) NOT NULL COMMENT '标题',
+ `image` varchar(128) NOT NULL COMMENT '图片路径',
+ `tv` varchar(128) NOT NULL COMMENT '视频路径',
+ `description` varchar(255) NOT NULL COMMENT '描述',
+ `theme_id` bigint(20) NOT NULL COMMENT '活动id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '教学视频';

@@ -16,7 +16,7 @@ spring:
   application:
     name: base-provider
 
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 154.8.146.181:8848
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 154.8.146.181:8848

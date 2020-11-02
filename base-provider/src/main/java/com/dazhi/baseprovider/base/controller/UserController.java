@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author dazhi
- * @since 2020-10-09
+ * @since 2020-11-02
  */
 @RestController
 @RequestMapping("/base/user")
 @Api(value = "/base/user", tags = "UserController", description = "用户管理接口")
-public class UserController extends BaseController<User,IUserService> {
+public class UserController extends BaseController<User, IUserService> {
 }

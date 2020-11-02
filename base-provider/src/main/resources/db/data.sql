@@ -1,5 +1,5 @@
 /*mock data***/
-INSERT INTO user (username, password)
+INSERT INTO user (username, nickname, password)
 VALUES
-('admin', '123'),
-('password', '123');
+('admin', '张三', '123'),
+('password', '李四', '123');
