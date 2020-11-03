@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="chackIsLogin">
+    <div v-if="isLogin">
       <van-row>
         <van-col span="16">
           <h4>{{GLOBAL.localStorage.username}}</h4>
@@ -9,6 +9,7 @@
           <van-image width="100" height="100" :src="this.GLOBAL.localStorage.image" />
         </van-col>
       </van-row>
+      <van-button @click="logout">退出登录</van-button>
     </div>
 
     <div v-else>
@@ -82,36 +83,36 @@ export default {
       username: '',
       password: '',
       re_password: '',
-      isLogin: false
-    }
-  },
-  computed: {
-    chackIsLogin () {
-      return window.sessionStorage.getItem('isLogin')
+      isLogin: this.GLOBAL.localStorage.isLogin
     }
   },
   mounted: function () {
-    console.log(window.sessionStorage.getItem('isLogin'))
-
-    this.isLogin = window.sessionStorage.getItem('isLogin')
+    // console.log(window.sessionStorage.getItem('isLogin'))
   },
   methods: {
     onSubmit (values) {
       console.log('submit', values)
+      // 校验用户并返回用户信息
     },
     onLogin (values) {
       console.log('submit', values)
+      this.$axios.post('/base/user/login', {username: this.username, password: this.password})
+        .then(resp => {
+          this.detail = resp.data
+          // console.log(resp.data.data)
+        })
+        .catch(function (error) { // 请求失败处理
+          console.log(error)
+        })
       if (this.username === this.password) {
         this.GLOBAL.localStorage.username = this.username
         this.GLOBAL.localStorage.isLogin = true
-        window.sessionStorage.setItem('username', this.username)
-        window.sessionStorage.setItem('isLogin', true)
         this.isLogin = true
-        // this.$router.push({
-        //   name: 'Me'
-        // })
-        console.log(window.sessionStorage.getItem('username'))
       }
+    },
+    logout () {
+      this.GLOBAL.localStorage.isLogin = false
+      this.isLogin = false
     }
   }
 }
