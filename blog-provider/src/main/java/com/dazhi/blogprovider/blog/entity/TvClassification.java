@@ -3,6 +3,10 @@ package com.dazhi.blogprovider.blog.entity;
 import com.dazhi.blogprovider.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -26,6 +30,9 @@ public class TvClassification extends BaseEntity {
     @ApiModelProperty(value = "父标签")
     private Long pid;
 
+    @ApiModelProperty(value = "层级")
+    private Long level;
+
     public String getName() {
         return name;
     }
@@ -48,12 +55,11 @@ public class TvClassification extends BaseEntity {
         this.pid = pid;
     }
 
-    @Override
-    public String toString() {
-        return "TvClassification{" +
-            "name=" + name +
-            ", description=" + description +
-            ", pid=" + pid +
-        "}";
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
     }
 }
