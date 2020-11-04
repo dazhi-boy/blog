@@ -148,3 +148,14 @@ CREATE TABLE `tutorial_tv` (
  `description` varchar(255) NOT NULL COMMENT '描述',
  `theme_id` bigint(20) NOT NULL COMMENT '活动id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '教学视频';
+
+-- 视频分类
+DROP TABLE IF EXISTS `tv_classification`;
+CREATE TABLE `tv_classification` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `name` varchar(30) NOT NULL COMMENT '主题名',
+ `description` varchar(255) NOT NULL COMMENT '描述',
+ `pid` bigint(20) COMMENT '父标签'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '视频分类';

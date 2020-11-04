@@ -49,3 +49,13 @@ VALUES
 ('凤凰岭是一座山，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '凤凰岭是一座山，图2', 1),
 ('慕田峪长城很好玩，图1', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图1', 2),
 ('慕田峪长城很好玩，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图2', 2);
+
+-- 视频分类
+INSERT INTO tv_classification (name, description, pid)
+VALUES
+('java', '这是旅游专栏', 0),
+('java基础', '这是旅游专栏', 1),
+('java晋级', '这是旅游专栏', 1),
+('mysql', '大家一起嗨', 0),
+('mysql基础', '大家一起嗨', 4),
+('mysql晋级', '大家一起嗨', 4);

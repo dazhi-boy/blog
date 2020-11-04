@@ -20,7 +20,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User login(String username, String password) {
-        QueryWrapper queryWrapper = new QueryWrapper();
+        QueryWrapper<User> queryWrapper = new QueryWrapper();
         queryWrapper.eq("username",username);
         return this.baseMapper.selectOne(queryWrapper);
     }

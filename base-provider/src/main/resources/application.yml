@@ -16,6 +16,11 @@ spring:
   application:
     name: base-provider
 
+#mybatis-plus配置控制台打印完整带参数SQL语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 #  cloud:
 #    nacos:
 #      discovery:

@@ -1,12 +1,27 @@
 <template>
     <div>
-      <iframe src="//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+      <iframe v-for="item in tvdata" :key="item.id" :src="item.tv" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Tutorial'
+  name: 'Tutorial',
+  data () {
+    return {
+      tvdata: []
+    }
+  },
+  mounted: function () {
+    this.$axios.get(`/blog/tutorial-tv`)
+      .then(resp => {
+        this.tvdata = resp.data.data.records
+        // console.log(resp.data.data.records)
+      })
+      .catch(function (error) { // 请求失败处理
+        console.log(error)
+      })
+  }
 }
 </script>
 
