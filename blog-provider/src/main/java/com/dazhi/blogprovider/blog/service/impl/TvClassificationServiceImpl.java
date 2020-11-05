@@ -6,6 +6,8 @@ import com.dazhi.blogprovider.blog.service.ITvClassificationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 视频分类 服务实现类
@@ -17,4 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TvClassificationServiceImpl extends ServiceImpl<TvClassificationMapper, TvClassification> implements ITvClassificationService {
 
+    @Override
+    public List<TvClassification> getWithDetailByLevel(Long level) {
+        return this.baseMapper.getWithDetailByLevel(level);
+    }
 }

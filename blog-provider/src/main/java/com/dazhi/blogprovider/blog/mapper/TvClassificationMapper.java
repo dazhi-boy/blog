@@ -2,6 +2,9 @@ package com.dazhi.blogprovider.blog.mapper;
 
 import com.dazhi.blogprovider.blog.entity.TvClassification;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface TvClassificationMapper extends BaseMapper<TvClassification> {
 
+    List<TvClassification> getWithDetailByLevel(@Param("level") Long level);
 }

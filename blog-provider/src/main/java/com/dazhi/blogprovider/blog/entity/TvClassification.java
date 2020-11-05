@@ -1,5 +1,6 @@
 package com.dazhi.blogprovider.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dazhi.blogprovider.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -33,6 +34,9 @@ public class TvClassification extends BaseEntity {
     @ApiModelProperty(value = "层级")
     private Long level;
 
+    @TableField(exist = false)
+    private List<TvClassification> child = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -61,5 +65,13 @@ public class TvClassification extends BaseEntity {
 
     public void setLevel(Long level) {
         this.level = level;
+    }
+
+    public List<TvClassification> getChild() {
+        return child;
+    }
+
+    public void setChild(List<TvClassification> child) {
+        this.child = child;
     }
 }
