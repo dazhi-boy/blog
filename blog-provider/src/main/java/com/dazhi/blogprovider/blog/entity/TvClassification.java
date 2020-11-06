@@ -28,6 +28,9 @@ public class TvClassification extends BaseEntity {
     @ApiModelProperty(value = "描述")
     private String description;
 
+    @ApiModelProperty(value = "图片路径")
+    private String image;
+
     @ApiModelProperty(value = "父标签")
     private Long pid;
 
@@ -46,6 +49,14 @@ public class TvClassification extends BaseEntity {
     }
     public String getDescription() {
         return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setDescription(String description) {

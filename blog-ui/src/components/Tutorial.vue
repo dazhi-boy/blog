@@ -1,9 +1,21 @@
 <template>
     <div>
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="value1" :options="option1" />
-        <van-dropdown-item v-model="value2" :options="option2" />
-      </van-dropdown-menu>
+      <van-tabs>
+        <van-tab v-for="item in tvdata" :key="item.id" :title="item.name">
+          <van-grid :column-num="2">
+            <van-grid-item
+              v-for="one in item.child"
+              :key="one.id"
+              :text="one.name"
+              @click="detail('attractions',one.id)"
+            >
+              <van-image :src="one.image" />
+              <van-field v-text="one.name" />
+              <van-field v-text="one.description" />
+            </van-grid-item>
+          </van-grid>
+        </van-tab>
+      </van-tabs>
       <iframe v-for="item in tvdata" :key="item.id" :src="item.tv" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
     </div>
 </template>
@@ -29,18 +41,32 @@ export default {
     }
   },
   mounted: function () {
-    this.$axios.get(`/blog/tv-classification`)
+    this.$axios.get(`/blog/tv-classification/1/list`)
       .then(resp => {
-        this.tvdata = resp.data.data.records
-        console.log(resp.data.data.records)
+        this.tvdata = resp.data.data
+        console.log(resp.data.data)
       })
       .catch(function (error) { // 请求失败处理
         console.log(error)
       })
+  },
+  methods: {
+    detail (target, id) {
+      this.$router.push({
+        name: 'Detail',
+        params: {
+          target: target,
+          id: id
+        }
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.tv_type {
+  background: red;
+  margin: 20px;
+}
 </style>

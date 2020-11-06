@@ -157,6 +157,7 @@ CREATE TABLE `tv_classification` (
  `del_time` varchar(30),
  `name` varchar(30) NOT NULL COMMENT '主题名',
  `description` varchar(255) NOT NULL COMMENT '描述',
+ `image` varchar(128) NOT NULL COMMENT '图片路径',
  `level` bigint(20) NOT NULL COMMENT '层级',
  `pid` bigint(20) COMMENT '父标签'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '视频分类';
