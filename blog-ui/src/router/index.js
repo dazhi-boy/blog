@@ -6,6 +6,7 @@ import Me from '@/components/Me'
 import List from '@/components/List'
 import Detail from '@/components/Detail'
 import Tutorial from '@/components/Tutorial'
+import TutorialDetail from '@/components/TutorialDetail'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/tutorialDetail',
+      name: 'TutorialDetail',
+      component: TutorialDetail
     }
   ]
 })

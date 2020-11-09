@@ -13,7 +13,7 @@ export default {
   name: 'Bottom',
   data () {
     return {
-      active: 1
+      active: 0
     }
   },
   mounted: function () {}

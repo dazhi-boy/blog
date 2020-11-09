@@ -53,7 +53,7 @@ export default {
   methods: {
     detail (target, id) {
       this.$router.push({
-        name: 'Detail',
+        name: 'TutorialDetail',
         params: {
           target: target,
           id: id
