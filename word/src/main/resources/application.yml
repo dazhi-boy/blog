@@ -1,0 +1,16 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: word
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+    url: jdbc:mysql://154.8.146.181:3306/blog?characterEncoding=UTF8
+    username: root
+    password: zxcv1234
+    platform: mysql
