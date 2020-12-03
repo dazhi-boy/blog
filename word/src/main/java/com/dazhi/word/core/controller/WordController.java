@@ -5,10 +5,14 @@ import com.dazhi.word.common.Result;
 import com.dazhi.word.core.entity.Word;
 import com.dazhi.word.core.service.IWordService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.dazhi.word.common.BaseController;
+
+import java.io.IOException;
 
 /**
  * <p>
@@ -23,8 +27,11 @@ import com.dazhi.word.common.BaseController;
 @Api(value = "/core/word", tags = "WordController", description = "单词管理接口")
 public class WordController extends BaseController<Word, IWordService> {
 
-    public Result init() {
-
+    @GetMapping("/init")
+    @ApiOperation(value = "初始化")
+    public Result init() throws IOException {
+        IWordService iWordService = (IWordService) super.iService;
+        iWordService.init();
         return Result.ok("初始化成功");
     }
 }

@@ -23,7 +23,7 @@ public class SwaggerApp {
     @Bean
     public Docket createRestApi() {// 创建API基本信息
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select() //
-                .apis(basePackage("com.dazhi.blogprovider.blog.controller" + splitor + "com.dazhi.shop.controller" + splitor + "com.dazhi.blogprovider.common")) //
+                .apis(basePackage("com.dazhi.word.core.controller" + splitor + "com.dazhi.shop.controller" + splitor + "com.dazhi.word.common")) //
                 .paths(PathSelectors.any())
                 .build();
     }

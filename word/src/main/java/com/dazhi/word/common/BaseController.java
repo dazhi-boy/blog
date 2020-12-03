@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 public class BaseController<T,E extends IService<T>> {
     protected IService iService;
@@ -47,13 +48,21 @@ public class BaseController<T,E extends IService<T>> {
     }
 
     @ApiOperation(value = "获取列表")
-    @GetMapping
-    public Result<IPage<T>> list() {
-        IPage<T> page = new Page<>();
+    @GetMapping("/page/{current}/{size}")
+    public Result<IPage<T>> page(@PathVariable("current") Long current, @PathVariable("size") Long size) {
+        IPage<T> page = new Page<>(current, size);
         IPage<T> tPage = iService.page(page);
-        // List<User> list = userService.list();
         Result<IPage<T>> result = Result.ok("OK");
         result.setData(tPage);
+        return result;
+    }
+
+    @ApiOperation(value = "获取列表")
+    @GetMapping("/page")
+    public Result<List<T>> list() {
+        List<T> list = iService.list();
+        Result<List<T>> result = Result.ok("OK");
+        result.setData(list);
         return result;
     }
 }
