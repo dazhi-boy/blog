@@ -17,4 +17,8 @@ import java.io.IOException;
 public interface IWordService extends IService<Word> {
 
     void init() throws IOException;
+
+    void initTranslate();
+
+    void initMusic();
 }

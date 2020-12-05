@@ -1,0 +1,90 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+&lt;!&ndash;<embed height="100" width="100" src="http://dict.youdao.com/dictvoice?type=0&audio=hello" />&ndash;&gt;
+&lt;!&ndash;
+<object height="100" width="100" data="http://dict.youdao.com/dictvoice?type=0&audio=hello"></object>
+&ndash;&gt;
+
+&lt;!&ndash;<audio controls autoplay>
+    <source src="http://dict.youdao.com/dictvoice?type=0&audio=hello" type="audio/ogg">
+    <source src="http://dict.youdao.com/dictvoice?type=0&audio=hello" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>&ndash;&gt;
+
+<audio controls autoplay>
+    <source src="https://www.w3school.com.cn/i/song.mp3">
+    您的浏览器不支持 audio 元素。
+</audio>
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8"> 
+    <title>菜鸟教程(runoob.com)</title> 
+
+</head>
+<body>
+
+<audio controls autoplay="autoplay" id="audio">
+    <source id="music" src="https://www.w3school.com.cn/i/song.mp3" type="audio/ogg">
+
+
+    <!--<source id="music" src="https://www.w3school.com.cn/i/song.mp3" type="audio/ogg">-->
+
+    <!--<source src="https://www.w3school.com.cn/i/song.mp3" type="audio/mpeg">-->
+    您的浏览器不支持 audio 元素。
+</audio>
+<span id="bf" onclick="bf();">播放/暂停</span>
+<!--<iframe id="idSign" src="https://cn.bing.com/images/async?q=apple&first=43&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1" width="100%" height="800px"></iframe>-->
+</body>
+
+
+
+<script>
+
+    function bf(){
+        var audio = document.getElementById('audio');
+        if (audio !== null) {
+            //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+            if (audio.paused) {
+                audio.play();//audio.play();// 这个就是播放
+            } else {
+                audio.pause();// 这个就是暂停
+            }
+        }
+    }
+
+    function checkTime(){
+        // document.getElementById('audio').c
+        //
+        //     .src = "https://www.w3school.com.cn/i/horse.mp3";
+        bf();
+        var nowtime=Date.parse(new Date());
+        console.log(nowtime);
+    }
+    setInterval("checkTime()","3000");
+
+    /*window.onload = function(){
+        setTimeout(function (){
+            // bf()
+            console.log("idSign");
+        },1);*/
+
+        /*var idSign =  document.getElementById('idSign')
+
+        console.log(idSign);
+
+        setTimeout(function (){
+            console.log(2)
+            idSign.src = "https://cn.bing.com/images/async?q=key&first=43&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1";
+        },1000);*/
+    // }
+</script>
+</html>

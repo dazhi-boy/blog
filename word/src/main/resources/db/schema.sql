@@ -16,6 +16,7 @@ CREATE TABLE `word` (
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),
  `term` varchar(30) NOT NULL UNIQUE COMMENT '词',
+ `translate` varchar(30) NOT NULL UNIQUE COMMENT '翻译',
  `status` varchar(10) COMMENT '状态',
  `frequency` integer COMMENT '出现次数',
  `grade` varchar(10) COMMENT '级别',

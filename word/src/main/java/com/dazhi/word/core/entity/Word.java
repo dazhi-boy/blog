@@ -20,6 +20,9 @@ public class Word extends BaseEntity {
     @ApiModelProperty(value = "词")
     private String term;
 
+    @ApiModelProperty(value = "翻译")
+    private String translate;
+
     @ApiModelProperty(value = "状态")
     private String status;
 
@@ -41,6 +44,14 @@ public class Word extends BaseEntity {
     }
     public String getStatus() {
         return status;
+    }
+
+    public String getTranslate() {
+        return translate;
+    }
+
+    public void setTranslate(String translate) {
+        this.translate = translate;
     }
 
     public void setStatus(String status) {

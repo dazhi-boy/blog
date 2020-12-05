@@ -34,4 +34,20 @@ public class WordController extends BaseController<Word, IWordService> {
         iWordService.init();
         return Result.ok("初始化成功");
     }
+
+    @GetMapping("/initTranslate")
+    @ApiOperation(value = "初始化翻译")
+    public Result initTranslate() throws IOException {
+        IWordService iWordService = (IWordService) super.iService;
+        iWordService.initTranslate();
+        return Result.ok("翻译成功");
+    }
+
+    @GetMapping("/initMusic")
+    @ApiOperation(value = "初始化读音")
+    public Result initMusic() throws IOException {
+        IWordService iWordService = (IWordService) super.iService;
+        iWordService.initMusic();
+        return Result.ok("初始化读音");
+    }
 }
