@@ -1,6 +1,11 @@
 package com.dazhi.word.core.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dazhi.word.common.CoreCache;
 import com.dazhi.word.common.Result;
 import com.dazhi.word.core.entity.Word;
 import com.dazhi.word.core.service.IWordService;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dazhi.word.common.BaseController;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.List;
 
 /**
  * <p>
@@ -49,5 +56,45 @@ public class WordController extends BaseController<Word, IWordService> {
         IWordService iWordService = (IWordService) super.iService;
         iWordService.initMusic();
         return Result.ok("初始化读音");
+    }
+
+    @GetMapping("/initTree")
+    @ApiOperation(value = "初始化单词树")
+    public Result initTree() throws IOException {
+        IWordService iWordService = (IWordService) super.iService;
+        iWordService.initTree();
+        return Result.ok("初始化单词树");
+    }
+
+    @GetMapping("/getBatch")
+    @ApiOperation(value = "获取一批单词")
+    public Result<List<Word>> getBatch() throws IOException {
+        IWordService iWordService = (IWordService) super.iService;
+        List<Word> wordList = iWordService.getBatch();
+
+//        IPage<Word> page = new Page<>(1, 5);
+//
+//        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+//
+//        CoreCache.wordFrequencyCache.get("1");
+//        queryWrapper.eq("frequency", "");
+//        IPage<Word> tPage = iWordService.page(page, queryWrapper);
+
+        Result<List<Word>> result = Result.ok("OK");
+        result.setData(wordList);
+        return result;
+    }
+
+
+    public static void main(String[] args) {
+        int frequency = 1;
+
+        int group = 1;
+        for (int j = 0; j<2; j++) {
+            group += j;
+            for (int i = 0; i < 2; i++) {
+                System.out.println(group);
+            }
+        }
     }
 }

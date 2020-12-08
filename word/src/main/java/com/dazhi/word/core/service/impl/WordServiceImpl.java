@@ -1,6 +1,9 @@
 package com.dazhi.word.core.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dazhi.word.common.CoreCache;
 import com.dazhi.word.core.entity.Word;
+import com.dazhi.word.core.entity.WordTree;
 import com.dazhi.word.core.mapper.WordMapper;
 import com.dazhi.word.core.service.IWordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,7 +18,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -95,6 +101,58 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
             downloadUtils.httpDownload();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void initTree() {
+        //查询所有的单词
+        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("grade","primary");
+        List<Word> wordList = super.list(queryWrapper);
+        Stack<Word> wordStack = new Stack<>();
+        for (int i = (wordList.size()-1); i>=0; i--) {
+            wordStack.push(wordList.get(i));
+        }
+        //将查询的数据重新组装
+        WordTree wordTree = new WordTree();
+        int count = (int) Math.ceil(wordList.size()/5);
+        for (int i = 0; i<count; i++) {
+            List<Word> words = new ArrayList<>();
+            for (int j = 0; j<5; j++) {
+                words.add(wordStack.pop());
+            }
+            wordTree.addWords(words);
+        }
+        CoreCache.WORD_TREE_CACHE.put(1L, wordTree);
+        CoreCache.CURRENT_LEVEL.put(1L, 1);
+    }
+
+    @Override
+    public List<Word> getBatch() {
+        Integer level = CoreCache.CURRENT_LEVEL.get(1L);
+        WordTree wordTree = CoreCache.WORD_TREE_CACHE.get(1L);
+        List<WordTree.Words> wordsList = wordTree.getWordsList();
+        List<WordTree.Words> newWordList =  wordsList.stream().filter(words -> words.getFrequency().equals(CoreCache.CURRENT_LEVEL.get(1L))).collect(Collectors.toList());
+        if (newWordList.size() < Math.pow(2,level)) { // 如果还在当前层级
+            WordTree.Words word = wordsList.stream().filter(words -> words.getFrequency() == 0).collect(Collectors.toList()).get(0);
+            // 遍历，状态+1
+            word.setFrequency(word.getFrequency() + 1);
+            CoreCache.CURRENT_LEVEL.put(1L,1);
+            System.out.println("本次请求取得的数量：" + word.getWords().size());
+            return word.getWords();
+        }else if (newWordList.size() == Math.pow(2,level)) {    // 如果正好相等，将符合条件的数据都组装起来发送，等级加一
+            //遍历装配数据，改状态+1
+            List<Word> list = new ArrayList<>();
+            for (WordTree.Words words : newWordList) {
+                words.setFrequency(words.getFrequency()+1);
+                list.addAll(words.getWords());
+            }
+            CoreCache.CURRENT_LEVEL.put(1L,level += 1);
+            System.out.println("本次请求取得的数量：" + list.size());
+            return list;
+        }else {
+            return null;
         }
     }
 }

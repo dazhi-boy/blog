@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -21,4 +22,8 @@ public interface IWordService extends IService<Word> {
     void initTranslate();
 
     void initMusic();
+
+    List<Word> getBatch();
+
+    void initTree();
 }
