@@ -43,7 +43,7 @@
             } **/
 
             for (var i=0;i<2;i++) {
-                var data = [];
+                var data;
                 $.ajax({
                     type: "GET",
                     url: "http://localhost:8888/core/word/getBatch",
@@ -56,20 +56,20 @@
 
                     }
                 });
-                for (var j = 0; j<data.length; j++){
-                    console.log(data[j]);
-                    bbf(data[j].term);
+                // for (var j = 0; j<data.length; j++){
+                //     console.log(data[j]);
+                    bbf(data.term);
                     // 延时
-                    var date = new Date().getTime();
+                    /*var date = new Date().getTime();
                     var date2 = new Date().getTime();
                     while ((date2-date)<3000){
                         date2 = new Date().getTime();
-                    }
+                    }*/
 
                     /*setInterval(function(){
                         console.log(data[j]);
                     }, 2000);*/
-                }
+                // }
             }
         }
 
@@ -123,7 +123,19 @@
         audio.src = "http://localhost:8888/music/" + term + ".mp3";
         audio.play();
     }
+    function getWord(bbf) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8888/core/word/getBatch",
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                bbf(result.data);
+            }
+        });
+    }
 
-    var interval = setInterval("bbf('car')","3000");
+    var interval = setInterval("init()","3000");
 </script>
 </html>

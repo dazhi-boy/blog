@@ -68,9 +68,9 @@ public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/getBatch")
     @ApiOperation(value = "获取一批单词")
-    public Result<List<Word>> getBatch() throws IOException {
+    public Result<Word> getBatch() throws IOException {
         IWordService iWordService = (IWordService) super.iService;
-        List<Word> wordList = iWordService.getBatch();
+        Word word = iWordService.getBatch();
 
 //        IPage<Word> page = new Page<>(1, 5);
 //
@@ -80,8 +80,8 @@ public class WordController extends BaseController<Word, IWordService> {
 //        queryWrapper.eq("frequency", "");
 //        IPage<Word> tPage = iWordService.page(page, queryWrapper);
 
-        Result<List<Word>> result = Result.ok("OK");
-        result.setData(wordList);
+        Result<Word> result = Result.ok("OK");
+        result.setData(word);
         return result;
     }
 
