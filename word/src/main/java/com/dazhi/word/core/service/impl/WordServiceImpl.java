@@ -116,12 +116,13 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
         }
         //将查询的数据重新组装
         WordTree wordTree = new WordTree();
-        int count = (int) Math.ceil(wordList.size()/5);
+//        int count = (int) Math.ceil(wordList.size()/5);
+        int count = wordList.size();
         for (int i = 0; i<count; i++) {
             List<Word> words = new ArrayList<>();
-            for (int j = 0; j<5; j++) {
+//            for (int j = 0; j<5; j++) {
                 words.add(wordStack.pop());
-            }
+//            }
             wordTree.addWords(words);
         }
         CoreCache.WORD_TREE_CACHE.put(1L, wordTree);
