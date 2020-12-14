@@ -1,24 +1,16 @@
 package com.dazhi.word.core.controller;
 
-
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.dazhi.word.common.CoreCache;
 import com.dazhi.word.common.Result;
 import com.dazhi.word.core.entity.Word;
 import com.dazhi.word.core.service.IWordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import com.dazhi.word.common.BaseController;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 
 /**
@@ -30,6 +22,7 @@ import java.util.List;
  * @since 2020-12-02
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/core/word")
 @Api(value = "/core/word", tags = "WordController", description = "单词管理接口")
 public class WordController extends BaseController<Word, IWordService> {
@@ -85,6 +78,33 @@ public class WordController extends BaseController<Word, IWordService> {
         return result;
     }
 
+    @GetMapping("/initWord/{grade}/{userId}")
+    @ApiOperation(value = "初始化自己需要记的所有的单词")
+    public Result<List<Word>> initWord(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
+        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("grade",grade).isNull("user_id");
+        IWordService iWordService = (IWordService) super.iService;
+        List<Word> wordList = iWordService.list(queryWrapper);
+        for (Word word : wordList) {
+            word.setId(null);
+            word.setUserId(userId);
+        }
+        iWordService.saveBatch(wordList);
+
+        return Result.ok("搞定");
+    }
+
+    @GetMapping("/getWordsByGrade/{grade}/{userId}")
+    @ApiOperation(value = "获取没记住的所有的单词")
+    public Result<List<Word>> getWordsByGrade(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
+        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
+        IWordService iWordService = (IWordService) super.iService;
+        List<Word> wordList = iWordService.list(queryWrapper);
+        Result<List<Word>> result = Result.ok("OK");
+        result.setData(wordList);
+        return result;
+    }
 
     public static void main(String[] args) {
         int frequency = 1;

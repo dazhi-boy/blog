@@ -19,78 +19,16 @@
 </div>
 <iframe id="idSign" src="https://cn.bing.com/images/async?q=apple&first=15&count=15&relp=15&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7" width="1200px" height="600px"></iframe>
 
-<!--https://cn.bing.com/images/async?q=haha&first=67&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*195_y*1152_h*183_c*1_i*36_r*7&IG=5BB73F97288D49299B3217B8879BB54C&SFX=2&iid=images.5530-->
-<!--https://cn.bing.com/images/async?q=haha&first=67&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7&IG=BA839C72861D4C18A21D271431A979E5&SFX=2&iid=images.5530-->
-
 </body>
 
 
 
 <script>
 
-    // $(document).ready(function(){
-    //     init();
+    function init() {
 
-        function init() {
-            /** while (true) {
-                initWord(function(data){
-                    // console.log(data);
-                    // console.log(data.length);
-                    var i;
-                    for ( i = 0; i < data.length; i++) {
-                        // data[i];
-                        // console.log(data[i]);
-                    }
-
-                    return data;
-                });
-            } **/
-
-            for (var i=0;i<2;i++) {
-                var data;
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost:8888/core/word/getBatch",
-                    data: {},
-                    dataType: "JSON",
-                    async: false,
-                    success: function(result) {
-                        // var data = [];
-                        data = result.data;
-
-                    }
-                });
-                // for (var j = 0; j<data.length; j++){
-                //     console.log(data[j]);
-
-                $("#enword").html(data.term);
-                $("#chword").html(data.translate);
-                    bbf(data.term);
-                    // 延时
-                    /*var date = new Date().getTime();
-                    var date2 = new Date().getTime();
-                    while ((date2-date)<3000){
-                        date2 = new Date().getTime();
-                    }*/
-
-                    /*setInterval(function(){
-                        console.log(data[j]);
-                    }, 2000);*/
-                // }
-            }
-        }
-
-        function initWord (cb) {
-            var data = [];
-            $.get("http://localhost:8888/core/word/getBatch", function(result){
-                // $("#word").html(result);
-
-                cb(result.data);
-                // 循环data取出单词
-                // 每5秒切换一次
-                // 循环完所有后再发一次请求
-            });
-
+        for (var i=0;i<2;i++) {
+            var data;
             $.ajax({
                 type: "GET",
                 url: "http://localhost:8888/core/word/getBatch",
@@ -98,13 +36,32 @@
                 dataType: "JSON",
                 async: false,
                 success: function(result) {
+                    // var data = [];
                     data = result.data;
-                    console.log(result.data);
+
                 }
             });
-        }
-    // });
 
+            $("#enword").html(data.term);
+            $("#chword").html(data.translate);
+                bbf(data.term);
+        }
+    }
+
+    function initWord (cb) {
+        var data = [];
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8888/core/word/getBatch",
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                data = result.data;
+                console.log(result.data);
+            }
+        });
+    }
 
     function bf(){
 
@@ -145,7 +102,6 @@
             }
         });
     }
-    // clearInterval(interval );//停止
     var interval;
 
     function bbb(){

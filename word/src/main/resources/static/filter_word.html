@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超级大魔王</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <input id="grade" name="grade" placeholder="等级"\>
+        <input id="userId" name="userId" placeholder="用户id"\>
+        <button onclick="init()">初始化我的数据</button>
+        <button onclick="begain()">开始筛选</button>
+    </div>
+    <!--显示单词-->
+    <h1 id="word"></h1>
+    <!--显示读音-->
+    <div>
+        <audio src="https://www.w3school.com.cn/i/song.mp3" controls id="audio" autoplay>low browsers not support</audio>
+    </div>
+    <!--点击显示翻译和图片-->
+    <h1 id="translate" hidden></h1>
+    <button onclick="ans()">答案</button>
+    <!--下一个-->
+    <button onclick="next()">下一个</button>
+    <!--请求后台将单词标记为记住，显示下一个-->
+    <button>so easy</button>
+    <div>
+        <iframe id="idSign" src="" width="1200px" height="600px"></iframe>
+    </div>
+</div>
+</body>
+
+<script>
+
+    function init() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "http://localhost:8888/core/word/initWord/"+grade+"/"+userId;
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                alert(result.data);
+            }
+        });
+    }
+    
+    var words = [];
+    var index = 1;
+    
+    function begain() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "http://localhost:8888/core/word/getWordsByGrade/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                console.log(result.data);
+                var word = result.data[0];
+                $("#word").html(word.term);
+                $("#audio").attr('src',"http://localhost:8888/music/" + word.term + ".mp3");
+                $("#translate").html(word.translate);
+                $("#translate").hide();
+                $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+word.term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
+                $("#idSign").hide();
+                words = result.data;
+                return words;
+            }
+        });
+    }
+
+    function next() {
+        // alert(words[index].term);
+        $("#word").html(words[index].term);
+        $("#audio").attr('src',"http://localhost:8888/music/" + words[index].term + ".mp3");
+        $("#translate").html(words[index].translate);
+        $("#translate").hide();
+        $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+words[index].term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
+        $("#idSign").hide();
+        index = index + 1;
+    }
+
+    function ans() {
+        $("#translate").show();
+        $("#idSign").show();
+    }
+
+</script>
+</html>
