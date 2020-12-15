@@ -36,12 +36,12 @@ public class CoreCache {
         System.out.println("系统启动中。。。加载word");
         List<String> grades = new ArrayList<>();
         grades.add("primary");
-        for (String grade : grades){
+        /*for (String grade : grades){
             QueryWrapper<Word> wrapper = new QueryWrapper();
             wrapper.eq("grade",grade);
             List<Word> codeList = iWordService.list(wrapper);
             WORDS.put(grade, codeList);
-        }
+        }*/
     }
 
     @PreDestroy
