@@ -39,7 +39,7 @@
     function init() {
         var grade = $("#grade").val();
         var userId = $("#userId").val();
-        var url = "http://localhost:8888/core/word/initWord/"+grade+"/"+userId;
+        var url = "/core/word/initWord/"+grade+"/"+userId;
 
         $.ajax({
             type: "GET",
@@ -59,7 +59,7 @@
     function begain() {
         var grade = $("#grade").val();
         var userId = $("#userId").val();
-        var url = "http://localhost:8888/core/word/getWordsByGrade/"+grade+"/"+userId;
+        var url = "/core/word/getWordsByGrade/"+grade+"/"+userId;
         $.ajax({
             type: "GET",
             url: url,
@@ -71,7 +71,7 @@
                 var word = result.data[0];
                 $("#wordId").html(word.id);
                 $("#word").html(word.term);
-                $("#audio").attr('src',"http://localhost:8888/music/" + word.term + ".mp3");
+                $("#audio").attr('src',"/music/" + word.term + ".mp3");
                 $("#translate").html(word.translate);
                 $("#translate").hide();
                 $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+word.term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
@@ -87,7 +87,7 @@
         index = index + 1;
         $("#wordId").html(words[index].id);
         $("#word").html(words[index].term);
-        $("#audio").attr('src',"http://localhost:8888/music/" + words[index].term + ".mp3");
+        $("#audio").attr('src',"/music/" + words[index].term + ".mp3");
         $("#translate").html(words[index].translate);
         $("#translate").hide();
         $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+words[index].term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
@@ -101,7 +101,7 @@
     
     function easy() {
         var wordId = $("#wordId").html();
-        var URL= "http://localhost:8888/core/word";
+        var URL= "/core/word";
         var data = words[index];
         data.status = 1;
         console.log(data);
