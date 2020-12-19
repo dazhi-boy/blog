@@ -23,7 +23,7 @@ public interface IWordService extends IService<Word> {
 
     void initMusic();
 
-    Word getBatch();
+    Word getBatch(Long userId);
 
-    void initTree();
+    void initTree(String grade, Long userId);
 }

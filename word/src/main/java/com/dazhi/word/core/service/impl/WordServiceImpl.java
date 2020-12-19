@@ -103,10 +103,10 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
-    public void initTree() {
+    public void initTree(String grade, Long userId) {
         //查询所有的单词
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("grade","primary");
+        queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
         List<Word> wordList = super.list(queryWrapper);
         Stack<Word> wordStack = new Stack<>();
         for (int i = (wordList.size()-1); i>=0; i--) {
@@ -122,22 +122,22 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
             }
             wordTree.addWords(words);
         }
-        CoreCache.WORD_TREE_CACHE.put(1L, wordTree);
-        CoreCache.CURRENT_LEVEL.put(1L, 1);
+        CoreCache.WORD_TREE_CACHE.put(userId, wordTree);
+        CoreCache.CURRENT_LEVEL.put(userId, 1);
 
         Queue<Word> wordQueue = new LinkedList<>();
-        CoreCache.WORD_QUEUE.put(1L, wordQueue);
+        CoreCache.WORD_QUEUE.put(userId, wordQueue);
         try {
             while (true){
-                Integer level = CoreCache.CURRENT_LEVEL.get(1L);
-                WordTree wordTree1 = CoreCache.WORD_TREE_CACHE.get(1L);
+                Integer level = CoreCache.CURRENT_LEVEL.get(userId);
+                WordTree wordTree1 = CoreCache.WORD_TREE_CACHE.get(userId);
                 List<WordTree.Words> wordsList = wordTree1.getWordsList();
-                List<WordTree.Words> newWordList =  wordsList.stream().filter(words -> words.getFrequency().equals(CoreCache.CURRENT_LEVEL.get(1L))).collect(Collectors.toList());
+                List<WordTree.Words> newWordList =  wordsList.stream().filter(words -> words.getFrequency().equals(CoreCache.CURRENT_LEVEL.get(userId))).collect(Collectors.toList());
                 if (newWordList.size() < Math.pow(2,level)) { // 如果还在当前层级
                     WordTree.Words word = wordsList.stream().filter(words -> words.getFrequency() == 0).collect(Collectors.toList()).get(0);
                     // 遍历，状态+1
                     word.setFrequency(word.getFrequency() + 1);
-                    CoreCache.CURRENT_LEVEL.put(1L,1);
+                    CoreCache.CURRENT_LEVEL.put(userId,1);
                     for(Word w : word.getWords()){
                         System.out.println(w);
                         wordQueue.offer(w);
@@ -153,7 +153,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
                             wordQueue.offer(w);
                         }
                     }
-                    CoreCache.CURRENT_LEVEL.put(1L,level += 1);
+                    CoreCache.CURRENT_LEVEL.put(userId,level += 1);
                 }
             }
         }catch (Exception e){
@@ -162,8 +162,8 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
-    public Word getBatch() {
-        Queue<Word> wordQueue = CoreCache.WORD_QUEUE.get(1L);
+    public Word getBatch(Long userId) {
+        Queue<Word> wordQueue = CoreCache.WORD_QUEUE.get(userId);
         return wordQueue.poll();
     }
 

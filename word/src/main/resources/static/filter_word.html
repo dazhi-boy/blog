@@ -8,10 +8,12 @@
 <body>
 <div>
     <div>
-        <input id="grade" name="grade" placeholder="等级"\>
+        <input id="grade" name="grade" placeholder="等级" value="primary" \>
         <input id="userId" name="userId" placeholder="用户id"\>
         <button onclick="init()">初始化我的数据</button>
         <button onclick="begain()">开始筛选</button>
+        <span id="show_count"></span>
+        <a href="./index.html">我去记单词</a>
     </div>
     <!--显示单词-->
     <span hidden id="wordId"></span>
@@ -32,6 +34,7 @@
         <iframe id="idSign" src="" width="1200px" height="600px"></iframe>
     </div>
 </div>
+<div class="foot">http://localhost:8888/filter_word.html</div>
 </body>
 
 <script>
@@ -78,6 +81,17 @@
                 $("#idSign").hide();
                 words = result.data;
                 return words;
+            }
+        });
+        var count_url = "/core/word/count/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: count_url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                $("#show_count").html(result.data);
             }
         });
     }
@@ -132,5 +146,6 @@
         float: left;
     !important
     }
+    .foot{ position:fixed; left:0px; bottom:0px;  width:100%; height: 50px; z-index:999;}
 </style>
 </html>

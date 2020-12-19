@@ -7,6 +7,12 @@
 </head>
 <body>
 <div>
+    <input id="grade" name="grade" placeholder="等级" value="primary" \>
+    <input id="userId" name="userId" placeholder="用户id"\>
+    <button onclick="init_word_list()">初始化单词树</button>
+    <a href="./filter_word.html">筛查没记住的单词</a>
+</div>
+<div>
 <h1 id="enword">皮一下</h1>
 <h1 id="chword">皮一下</h1>
 <audio src="https://www.w3school.com.cn/i/song.mp3" controls id="audio">low browsers not support</audio>
@@ -25,13 +31,32 @@
 
 <script>
 
-    function init() {
+    function init_word_list() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "http://localhost:8888/core/word/initTree/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                // var data = [];
+                // data = result.data;
+                // alert(result.msg)
+                init();
+            }
+        });
+    }
 
+    function init() {
+        var userId = $("#userId").val();
         for (var i=0;i<2;i++) {
             var data;
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8888/core/word/getBatch",
+                url: "http://localhost:8888/core/word/getBatch/"+userId,
                 data: {},
                 dataType: "JSON",
                 async: false,
@@ -91,9 +116,10 @@
         audio.play();
     }
     function getWord(bbf) {
+        var userId = $("#userId").val();
         $.ajax({
             type: "GET",
-            url: "http://localhost:8888/core/word/getBatch",
+            url: "http://localhost:8888/core/word/getBatch/"+userId,
             data: {},
             dataType: "JSON",
             async: false,

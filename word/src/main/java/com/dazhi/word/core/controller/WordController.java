@@ -51,19 +51,19 @@ public class WordController extends BaseController<Word, IWordService> {
         return Result.ok("初始化读音");
     }
 
-    @GetMapping("/initTree")
+    @GetMapping("/initTree/{grade}/{userId}")
     @ApiOperation(value = "初始化单词树")
-    public Result initTree() throws IOException {
+    public Result initTree(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
-        iWordService.initTree();
+        iWordService.initTree(grade, userId);
         return Result.ok("初始化单词树");
     }
 
-    @GetMapping("/getBatch")
+    @GetMapping("/getBatch/{userId}")
     @ApiOperation(value = "获取一批单词")
-    public Result<Word> getBatch() throws IOException {
+    public Result<Word> getBatch(@PathVariable("userId") Long userId) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
-        Word word = iWordService.getBatch();
+        Word word = iWordService.getBatch(userId);
 
 //        IPage<Word> page = new Page<>(1, 5);
 //
@@ -103,6 +103,21 @@ public class WordController extends BaseController<Word, IWordService> {
         List<Word> wordList = iWordService.list(queryWrapper);
         Result<List<Word>> result = Result.ok("OK");
         result.setData(wordList);
+        return result;
+    }
+
+    @GetMapping("/count/{grade}/{userId}")
+    @ApiOperation(value = "获取没记住的所有的单词")
+    public Result<String> count(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
+        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
+        IWordService iWordService = (IWordService) super.iService;
+        int unremember = iWordService.count(queryWrapper);
+        QueryWrapper<Word> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("grade",grade).eq("user_id",userId).eq("status","1");
+        int remember = iWordService.count(queryWrapper1);
+        Result<String> result = Result.ok("OK");
+        result.setData("未记住："+unremember+ " -- 已记住："+ remember);
         return result;
     }
 
