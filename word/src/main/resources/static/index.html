@@ -13,8 +13,8 @@
     <a href="./filter_word.html">筛查没记住的单词</a>
 </div>
 <div>
-<h1 id="enword">皮一下</h1>
-<h1 id="chword">皮一下</h1>
+<h1 id="enword">皮一下,很开心</h1>
+<h1 id="chword">皮一下，很开心</h1>
 <audio src="https://www.w3school.com.cn/i/song.mp3" controls id="audio">low browsers not support</audio>
 
 <!--<span id="bf" onclick="bf();">播放/暂停</span>-->
@@ -23,7 +23,7 @@
 <span id="ccc" onclick="ccc();" hidden>暂停</span>
 
 </div>
-<iframe id="idSign" src="https://cn.bing.com/images/async?q=apple&first=15&count=15&relp=15&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7" width="1200px" height="600px"></iframe>
+<iframe id="idSign" src="https://cn.bing.com/images/search?q=dog&form=QBIR&first=1&tsc=ImageBasicHover" width="1200px" height="600px"></iframe>
 
 </body>
 
@@ -34,7 +34,7 @@
     function init_word_list() {
         var grade = $("#grade").val();
         var userId = $("#userId").val();
-        var url = "http://localhost:8888/core/word/initTree/"+grade+"/"+userId;
+        var url = "/core/word/initTree/"+grade+"/"+userId;
         $.ajax({
             type: "GET",
             url: url,
@@ -52,11 +52,11 @@
 
     function init() {
         var userId = $("#userId").val();
-        for (var i=0;i<2;i++) {
+        // for (var i=0;i<2;i++) {
             var data;
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8888/core/word/getBatch/"+userId,
+                url: "/core/word/getBatch/"+userId,
                 data: {},
                 dataType: "JSON",
                 async: false,
@@ -66,18 +66,21 @@
 
                 }
             });
+            if(data == null || data == undefined || data == ""){
+                init_word_list();
+            }
 
             $("#enword").html(data.term);
             $("#chword").html(data.translate);
                 bbf(data.term);
-        }
+        // }
     }
 
     function initWord (cb) {
         var data = [];
         $.ajax({
             type: "GET",
-            url: "http://localhost:8888/core/word/getBatch",
+            url: "/core/word/getBatch",
             data: {},
             dataType: "JSON",
             async: false,
@@ -112,14 +115,14 @@
 
         var audio = document.getElementById('audio');
         audio.pause();
-        audio.src = "http://localhost:8888/music/" + term + ".mp3";
+        audio.src = "/music/" + term + ".mp3";
         audio.play();
     }
     function getWord(bbf) {
         var userId = $("#userId").val();
         $.ajax({
             type: "GET",
-            url: "http://localhost:8888/core/word/getBatch/"+userId,
+            url: "/core/word/getBatch/"+userId,
             data: {},
             dataType: "JSON",
             async: false,
