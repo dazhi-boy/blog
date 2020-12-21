@@ -37,55 +37,62 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void init() throws IOException {
         // 1. 读取文件
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world.txt").getFile()));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world2.txt").getFile()));
         // 2. 遍历
         String text;
         while ((text = bufferedReader.readLine()) != null) {
-            // 3. 保存文件
+            // 3. 保存文件primary | middle | high
 //            System.out.println(text);
             Word word = new Word();
             word.setTerm(text);
-            word.setGrade("primary");
+            word.setGrade("middle");
             try {
                 super.baseMapper.insert(word);
             }catch (Exception e){
                 System.out.println(text + "重复");
             }
         }
+        System.out.println("单词添加到数据库");
         bufferedReader.close();
     }
 
     @Override
     public void initTranslate() {
-        List<Word> words = super.baseMapper.selectList();
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("grade","middle");
+        queryWrapper.isNull("translate");
+        List<Word> words = super.baseMapper.selectList(queryWrapper);
+        int i = 0;
         for (Word word : words) {
             try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            String query = word.getTerm();
-            String res = api.getTransResult(query, "en", "zh");
+                Thread.sleep(1000);
 
-            JsonParser parser = new JsonParser();
-            JsonObject jsonObject = parser.parse(res).getAsJsonObject();
-            JsonArray trans_result = jsonObject.get("trans_result").getAsJsonArray();
-            JsonObject obj = (JsonObject) trans_result.get(0);
-            String ch = obj.get("dst").getAsString();
-            try {
+                String query = word.getTerm();
+                String res = api.getTransResult(query, "en", "zh");
+
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(res).getAsJsonObject();
+                JsonArray trans_result = jsonObject.get("trans_result").getAsJsonArray();
+                JsonObject obj = (JsonObject) trans_result.get(0);
+                String ch = obj.get("dst").getAsString();
+
                 String temp = URLDecoder.decode(ch, "utf-8");
                 System.out.println(temp);
                 word.setTranslate(temp);
                 super.baseMapper.updateById(word);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                System.out.println(++i);
+            } catch (Exception e) {
+                System.out.println("出错了："+word);
             }
         }
     }
 
     @Override
     public void initMusic() {
-        List<Word> words = super.baseMapper.selectList();
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("grade","middle");
+//        queryWrapper.isNull("translate");
+        List<Word> words = super.baseMapper.selectList(queryWrapper);
         GLOBAL.words = words;
 
         //get words url
@@ -97,6 +104,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
         DownloadUtils downloadUtils = new DownloadUtils(this);
         try {
             downloadUtils.httpDownload();
+            System.out.println("完成");
         } catch (Exception e) {
             e.printStackTrace();
         }
