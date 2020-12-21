@@ -74,7 +74,7 @@
                 var word = result.data[0];
                 $("#wordId").html(word.id);
                 $("#word").html(word.term);
-                $("#audio").attr('src',"/music/" + word.term + ".mp3");
+                $("#audio").attr('src',"/music/" + grade + "/" + word.term + ".mp3");
                 $("#translate").html(word.translate);
                 $("#translate").hide();
                 $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+word.term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
@@ -98,10 +98,11 @@
 
     function next() {
         // alert(words[index].term);
+        var grade = $("#grade").val();
         index = index + 1;
         $("#wordId").html(words[index].id);
         $("#word").html(words[index].term);
-        $("#audio").attr('src',"/music/" + words[index].term + ".mp3");
+        $("#audio").attr('src',"/music/" + grade + "/" + words[index].term + ".mp3");
         $("#translate").html(words[index].translate);
         $("#translate").hide();
         $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+words[index].term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");

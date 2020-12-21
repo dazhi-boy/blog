@@ -108,6 +108,7 @@
         // var audio = document.getElementById('idSign');
         // audio.src = "https://cn.bing.com/images/async?q=banana&first=43&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1";
         //改变图片
+        var grade = $("#grade").val();
         var idSign = document.getElementById('idSign');
         idSign.src = "https://cn.bing.com/images/async?q="+term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7";
 
@@ -115,7 +116,7 @@
 
         var audio = document.getElementById('audio');
         audio.pause();
-        audio.src = "/music/" + term + ".mp3";
+        audio.src = "/music/" + grade + "/" + term + ".mp3";
         audio.play();
     }
     function getWord(bbf) {
