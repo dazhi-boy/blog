@@ -14,3 +14,17 @@ spring:
     username: root
     password: zxcv1234
     platform: mysql
+    hikari:
+      read-only: false
+      connection-timeout: 60000
+      idle-timeout: 600000
+      validation-timeout: 3000
+      max-lifetime: 1800000
+      login-timeout: 5
+      maximum-pool-size: 200
+      minimum-idle: 10
+      connection-test-query: SELECT 1 #连接测试查询
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志

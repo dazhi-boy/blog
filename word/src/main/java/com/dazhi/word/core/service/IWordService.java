@@ -26,4 +26,6 @@ public interface IWordService extends IService<Word> {
     Word getBatch(Long userId);
 
     void initTree(String grade, Long userId);
+
+    void initWord(String grade, Long userId);
 }

@@ -170,6 +170,14 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
+    public void initWord(String grade, Long userId) {
+        String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
+                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
+        WordMapper wordMapper = super.baseMapper;
+        wordMapper.initWord(grade,userId);
+    }
+
+    @Override
     public Word getBatch(Long userId) {
         Queue<Word> wordQueue = CoreCache.WORD_QUEUE.get(userId);
         return wordQueue.poll();

@@ -81,7 +81,9 @@ public class WordController extends BaseController<Word, IWordService> {
     @GetMapping("/initWord/{grade}/{userId}")
     @ApiOperation(value = "初始化自己需要记的所有的单词")
     public Result<List<Word>> initWord(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
-        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
+                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
+        /*QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).isNull("user_id");
         IWordService iWordService = (IWordService) super.iService;
         List<Word> wordList = iWordService.list(queryWrapper);
@@ -89,8 +91,9 @@ public class WordController extends BaseController<Word, IWordService> {
             word.setId(null);
             word.setUserId(userId);
         }
-        iWordService.saveBatch(wordList);
-
+        iWordService.saveBatch(wordList);*/
+        IWordService iWordService = (IWordService) super.iService;
+        iWordService.initWord(grade,userId);
         return Result.ok("搞定");
     }
 
