@@ -147,7 +147,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
                     word.setFrequency(word.getFrequency() + 1);
                     CoreCache.CURRENT_LEVEL.put(userId,1);
                     for(Word w : word.getWords()){
-                        System.out.println(w);
+                        System.out.print(w.getTerm()+",");
                         wordQueue.offer(w);
                     }
                 }else if (newWordList.size() == Math.pow(2,level)) {    // 如果正好相等，将符合条件的数据都组装起来发送，等级加一
@@ -157,7 +157,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
                         words.setFrequency(words.getFrequency()+1);
 //                    list.addAll(words.getWords());
                         for(Word w : words.getWords()){
-                            System.out.println(w);
+                            System.out.print(w.getTerm()+",");
                             wordQueue.offer(w);
                         }
                     }
