@@ -1,13 +1,22 @@
 package com.dazhi.word.translate;
 
-import com.dazhi.word.util.HttpUtil;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 
 public class MusicPlay {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        String res = HttpUtil.getHttp("https://danci.911cha.com/lesson_173.html");
-        System.out.println(res);
+        Document document = Jsoup.connect("https://danci.911cha.com/lesson_173.html").get();
+        Elements elements = document.getElementsByClass("l5");
 
+        for (Element element : elements){
+            Elements ets = element.getElementsByTag("a");
+            System.out.println(ets.html());
+        }
 
 
 

@@ -14,6 +14,10 @@ import com.dazhi.word.translate.TransApi;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -37,7 +41,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void init() throws IOException {
         // 1. 读取文件
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world2.txt").getFile()));
+        /*BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world2.txt").getFile()));
         // 2. 遍历
         String text;
         while ((text = bufferedReader.readLine()) != null) {
@@ -52,14 +56,56 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
                 System.out.println(text + "重复");
             }
         }
+        System.out.println("单词添加到数据库");senior1
+        bufferedReader.close();*/
+        List<String> list = new ArrayList<String>();
+        Document document = Jsoup.connect("https://danci.911cha.com/lesson_173.html").get();
+        Elements elements = document.getElementsByClass("l5");
+
+        for (Element element : elements){
+            Elements ets = element.getElementsByTag("a");
+            for (Element et : ets){
+                String text = et.html();
+                list.add(text);
+//                System.out.println(text);
+               /* Word word = new Word();
+                word.setTerm(text);
+                word.setGrade("senior1");
+                try {
+                    super.baseMapper.insert(word);
+                }catch (Exception e){
+                    System.out.println(text + "重复");
+                }*/
+            }
+        }
+        list.sort(new StringComparator());
+        for (String str : list) {
+            Word word = new Word();
+            word.setTerm(str);
+            word.setGrade("senior1");
+            try {
+                super.baseMapper.insert(word);
+            }catch (Exception e){
+                System.out.println(str + "重复");
+            }
+        }
         System.out.println("单词添加到数据库");
-        bufferedReader.close();
+    }
+
+    class StringComparator implements Comparator<String> {
+        /**
+         * 按字符串长度降序排序
+         */
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.length() - o2.length();// 正确的方式
+        }
     }
 
     @Override
     public void initTranslate() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","middle");
+        queryWrapper.eq("grade","senior1");
         queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         int i = 0;
@@ -90,7 +136,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void initMusic() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","middle");
+        queryWrapper.eq("grade","senior1");
 //        queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         GLOBAL.words = words;
