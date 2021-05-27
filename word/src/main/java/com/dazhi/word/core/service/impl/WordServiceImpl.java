@@ -59,7 +59,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
         System.out.println("单词添加到数据库");senior1
         bufferedReader.close();*/
         List<String> list = new ArrayList<String>();
-        Document document = Jsoup.connect("https://danci.911cha.com/lesson_173.html").get();
+        Document document = Jsoup.connect("https://danci.911cha.com/lesson_206.html").get();
         Elements elements = document.getElementsByClass("l5");
 
         for (Element element : elements){
@@ -82,7 +82,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
         for (String str : list) {
             Word word = new Word();
             word.setTerm(str);
-            word.setGrade("senior1");
+            word.setGrade("college3");
             try {
                 super.baseMapper.insert(word);
             }catch (Exception e){
@@ -105,7 +105,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void initTranslate() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","senior1");
+        queryWrapper.eq("grade","college3");
         queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         int i = 0;
@@ -136,7 +136,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void initMusic() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","senior1");
+        queryWrapper.eq("grade","college3");
 //        queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         GLOBAL.words = words;
