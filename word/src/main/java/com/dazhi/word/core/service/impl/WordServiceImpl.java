@@ -1,6 +1,9 @@
 package com.dazhi.word.core.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.injector.methods.SelectPage;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dazhi.word.common.CoreCache;
 import com.dazhi.word.core.entity.Word;
 import com.dazhi.word.core.entity.WordTree;
@@ -14,6 +17,10 @@ import com.dazhi.word.translate.TransApi;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -37,7 +44,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void init() throws IOException {
         // 1. 读取文件
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world2.txt").getFile()));
+        /*BufferedReader bufferedReader = new BufferedReader(new FileReader(Thread.currentThread().getContextClassLoader().getResource("world2.txt").getFile()));
         // 2. 遍历
         String text;
         while ((text = bufferedReader.readLine()) != null) {
@@ -52,14 +59,56 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
                 System.out.println(text + "重复");
             }
         }
+        System.out.println("单词添加到数据库");senior1
+        bufferedReader.close();*/
+        List<String> list = new ArrayList<String>();
+        Document document = Jsoup.connect("https://danci.911cha.com/lesson_173.html").get();
+        Elements elements = document.getElementsByClass("l5");
+
+        for (Element element : elements){
+            Elements ets = element.getElementsByTag("a");
+            for (Element et : ets){
+                String text = et.html();
+                list.add(text);
+//                System.out.println(text);
+               /* Word word = new Word();
+                word.setTerm(text);
+                word.setGrade("senior1");
+                try {
+                    super.baseMapper.insert(word);
+                }catch (Exception e){
+                    System.out.println(text + "重复");
+                }*/
+            }
+        }
+        list.sort(new StringComparator());
+        for (String str : list) {
+            Word word = new Word();
+            word.setTerm(str);
+            word.setGrade("senior1");
+            try {
+                super.baseMapper.insert(word);
+            }catch (Exception e){
+                System.out.println(str + "重复");
+            }
+        }
         System.out.println("单词添加到数据库");
-        bufferedReader.close();
+    }
+
+    class StringComparator implements Comparator<String> {
+        /**
+         * 按字符串长度降序排序
+         */
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.length() - o2.length();// 正确的方式
+        }
     }
 
     @Override
     public void initTranslate() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","middle");
+        queryWrapper.eq("grade","senior2");
         queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         int i = 0;
@@ -90,7 +139,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     @Override
     public void initMusic() {
         QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("grade","middle");
+        queryWrapper.eq("grade","senior1");
 //        queryWrapper.isNull("translate");
         List<Word> words = super.baseMapper.selectList(queryWrapper);
         GLOBAL.words = words;
@@ -115,17 +164,23 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
         //查询所有的单词
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
-        List<Word> wordList = super.list(queryWrapper);
+        Page<Word> page = new Page(7, 64);//参数一是当前页，参数二是每页个数
+
+        IPage<Word> iPage = super.baseMapper.selectPage(page, queryWrapper);
+
+        List<Word> wordList = iPage.getRecords();
+//        List<Word> wordList = super.list(queryWrapper);
         Stack<Word> wordStack = new Stack<>();
         for (int i = (wordList.size()-1); i>=0; i--) {
             wordStack.push(wordList.get(i));
         }
         //将查询的数据重新组装
         WordTree wordTree = new WordTree();
-        int count = (int) Math.ceil(wordList.size()/5);
+        int sun = 1;
+        int count = (int) Math.ceil(wordList.size()/sun);
         for (int i = 0; i<count; i++) {
             List<Word> words = new ArrayList<>();
-            for (int j = 0; j<5; j++) {
+            for (int j = 0; j<sun; j++) {
                 words.add(wordStack.pop());
             }
             wordTree.addWords(words);
@@ -171,8 +226,8 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
 
     @Override
     public void initWord(String grade, Long userId) {
-        String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
-                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
+        String sql = "INSERT INTO word (version,term,translate,`grade`,user_id) " +
+                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null and del_time is null)";
         WordMapper wordMapper = super.baseMapper;
         wordMapper.initWord(grade,userId);
     }
