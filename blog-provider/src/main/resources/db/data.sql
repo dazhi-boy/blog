@@ -1,9 +1,9 @@
 /*mock data***/
 -- 主题数据
-INSERT INTO theme (name, description)
+INSERT INTO theme (name, description, image)
 VALUES
-('旅游', '这是旅游专栏'),
-('活动', '大家一起嗨');
+('英语', '英语学习专栏', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('编程', '编程交流专栏', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg');
 
 -- 景区数据
 INSERT INTO attractions (name, keywords, image, description, theme_id, user_id, longitude, latitude, province, city)
@@ -43,19 +43,19 @@ VALUES
 ('图2', 'http://154.8.146.181:8082/img/2.jpg', '慕田峪长城很好玩，图2', 2);
 
 -- 景区图文介绍
-INSERT INTO tutorial_tv (name, image, tv, description, theme_id)
+INSERT INTO tutorial_tv (name, image, tv, description, pid)
 VALUES
-('凤凰岭是一座山，图1', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '凤凰岭是一座山，图1', 1),
-('凤凰岭是一座山，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=286773884&bvid=BV1mf4y197tc&cid=226002527&page=1', '凤凰岭是一座山，图2', 1),
-('慕田峪长城很好玩，图1', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图1', 2),
-('慕田峪长城很好玩，图2', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图2', 2);
+('小学1第一课', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '凤凰岭是一座山，图1', 1),
+('小学1第二课', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=286773884&bvid=BV1mf4y197tc&cid=226002527&page=1', '凤凰岭是一座山，图2', 1),
+('小学2第一课', 'http://154.8.146.181:8082/img/1.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图1', 2),
+('小学2第二课', 'http://154.8.146.181:8082/img/2.jpg', '//player.bilibili.com/player.html?aid=968656710&bvid=BV1kp4y1U7AJ&cid=208861000&page=1', '慕田峪长城很好玩，图2', 2);
 
 -- 视频分类
 INSERT INTO tv_classification (name, description, image, level, pid)
 VALUES
-('java', '这是旅游专栏', 'http://154.8.146.181:8082/img/1.jpg', 1, 0),
-('java基础', '这是旅游专栏', 'http://154.8.146.181:8082/img/1.jpg', 2, 1),
-('java晋级', '这是旅游专栏', 'http://154.8.146.181:8082/img/1.jpg', 2, 1),
-('mysql', '大家一起嗨', 'http://154.8.146.181:8082/img/1.jpg', 1, 0),
-('mysql基础', '大家一起嗨', 'http://154.8.146.181:8082/img/1.jpg', 2, 4),
-('mysql晋级', '大家一起嗨', 'http://154.8.146.181:8082/img/1.jpg', 2, 4);
+('小学1', '小学1专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0),
+('小学2', '小学2专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0),
+('小学3', '小学3专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0),
+('初中1', '初中1专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0),
+('初中1', '初中2专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0),
+('初中1', '初中3专题', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 0);

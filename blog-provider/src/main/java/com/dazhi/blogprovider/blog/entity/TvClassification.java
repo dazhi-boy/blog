@@ -38,7 +38,7 @@ public class TvClassification extends BaseEntity {
     private Long level;
 
     @TableField(exist = false)
-    private List<TvClassification> child = new ArrayList<>();
+    private List<TutorialTv> child = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -78,11 +78,11 @@ public class TvClassification extends BaseEntity {
         this.level = level;
     }
 
-    public List<TvClassification> getChild() {
+    public List<TutorialTv> getChild() {
         return child;
     }
 
-    public void setChild(List<TvClassification> child) {
+    public void setChild(List<TutorialTv> child) {
         this.child = child;
     }
 }
