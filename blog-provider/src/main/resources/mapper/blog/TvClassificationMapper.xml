@@ -6,14 +6,14 @@
     <!-- 使用resultMap映射实体类和字段之间的一一对应关系 -->
     <resultMap type="com.dazhi.blogprovider.blog.entity.TvClassification" id="TvClassification">
         <id property="id" column="id"/>
-        <collection property="child" column="id" ofType="com.dazhi.blogprovider.blog.entity.TvClassification" select="getChild"/>
+        <collection property="child" column="id" ofType="com.dazhi.blogprovider.blog.entity.TutorialTv" select="getChild"/>
     </resultMap>
 
-    <select id="getWithDetailByLevel" resultMap="TvClassification">
-        select * from tv_classification where level = #{level}
+    <select id="getWithDetailByPid" resultMap="TvClassification">
+        select * from tv_classification where pid = #{pid}
     </select>
 
-    <select id="getChild" parameterType="Long" resultType="com.dazhi.blogprovider.blog.entity.TvClassification">
-        SELECT * FROM tv_classification WHERE pid=#{id}
+    <select id="getChild" parameterType="Long" resultType="com.dazhi.blogprovider.blog.entity.TutorialTv">
+        SELECT * FROM tutorial_tv WHERE pid=#{id}
     </select>
 </mapper>

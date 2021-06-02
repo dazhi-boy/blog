@@ -29,8 +29,8 @@ public class TutorialTv extends BaseEntity {
     @ApiModelProperty(value = "描述")
     private String description;
 
-    @ApiModelProperty(value = "活动id")
-    private Long themeId;
+    @ApiModelProperty(value = "视频分类id")
+    private Long pid;
 
     public String getName() {
         return name;
@@ -60,22 +60,12 @@ public class TutorialTv extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Long getThemeId() {
-        return themeId;
+
+    public Long getPid() {
+        return pid;
     }
 
-    public void setThemeId(Long themeId) {
-        this.themeId = themeId;
-    }
-
-    @Override
-    public String toString() {
-        return "TutorialTv{" +
-            "name=" + name +
-            ", image=" + image +
-            ", tv=" + tv +
-            ", description=" + description +
-            ", themeId=" + themeId +
-        "}";
+    public void setPid(Long pid) {
+        this.pid = pid;
     }
 }

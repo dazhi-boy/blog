@@ -23,6 +23,9 @@ public class Theme extends BaseEntity {
     @ApiModelProperty(value = "描述")
     private String description;
 
+    @ApiModelProperty(value = "图片路径")
+    private String image;
+
     public String getName() {
         return name;
     }
@@ -38,11 +41,20 @@ public class Theme extends BaseEntity {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Theme{" +
             "name=" + name +
             ", description=" + description +
+            ", image=" + image +
         "}";
     }
 }
