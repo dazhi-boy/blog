@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface ITvClassificationService extends IService<TvClassification> {
 
-    List<TvClassification> getWithDetailByLevel(Long level);
+    List<TvClassification> getWithDetailByLevel(Long themeId);
 }

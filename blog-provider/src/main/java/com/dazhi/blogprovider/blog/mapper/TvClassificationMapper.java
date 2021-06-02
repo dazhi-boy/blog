@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface TvClassificationMapper extends BaseMapper<TvClassification> {
 
-    List<TvClassification> getWithDetailByLevel(@Param("level") Long level);
+    List<TvClassification> getWithDetailByPid(@Param("pid") Long pid);
 }

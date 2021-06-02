@@ -31,10 +31,10 @@ import java.util.List;
 public class TvClassificationController extends BaseController<TvClassification, ITvClassificationService> {
 
     @ApiOperation(value = "通过id获取entity和其明细")
-    @GetMapping("/{level}/list")
-    public Result<List<TvClassification>> getWithDetailByLevel(@PathVariable("level") Long level) {
+    @GetMapping("/{themeId}/list")
+    public Result<List<TvClassification>> getWithDetailByLevel(@PathVariable("themeId") Long themeId) {
         ITvClassificationService service = (ITvClassificationService)this.iService;
-        List<TvClassification> tvClassifications = service.getWithDetailByLevel(level);
+        List<TvClassification> tvClassifications = service.getWithDetailByLevel(themeId);
         Result<List<TvClassification>> result = Result.ok("OK");
         result.setData(tvClassifications);
         return result;

@@ -145,7 +145,7 @@ CREATE TABLE `tutorial_tv` (
  `del_time` varchar(30),
  `name` varchar(128) NOT NULL COMMENT '标题',
  `image` varchar(128) NOT NULL COMMENT '图片路径',
- `tv` varchar(128) NOT NULL COMMENT '视频路径',
+ `tv` varchar(1024) NOT NULL COMMENT '视频路径',
  `description` varchar(255) NOT NULL COMMENT '描述',
  `pid` bigint(20) NOT NULL COMMENT '视频分类id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '教学视频';

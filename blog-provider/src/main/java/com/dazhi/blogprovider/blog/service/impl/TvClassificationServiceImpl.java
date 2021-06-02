@@ -20,7 +20,7 @@ import java.util.List;
 public class TvClassificationServiceImpl extends ServiceImpl<TvClassificationMapper, TvClassification> implements ITvClassificationService {
 
     @Override
-    public List<TvClassification> getWithDetailByLevel(Long level) {
-        return this.baseMapper.getWithDetailByLevel(level);
+    public List<TvClassification> getWithDetailByLevel(Long themeId) {
+        return this.baseMapper.getWithDetailByPid(themeId);
     }
 }
