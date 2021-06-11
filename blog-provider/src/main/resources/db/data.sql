@@ -75,3 +75,10 @@ VALUES
 ('大学单词A1', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 1),
 ('大学单词B1', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 1),
 ('大学单词C1', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 1);
+
+-- 美食列表
+INSERT INTO food (name, description, image, type, open_id)
+VALUES
+('大学单词A1', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('大学单词B1', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('大学单词C1', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw');

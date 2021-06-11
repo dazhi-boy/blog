@@ -1,10 +1,6 @@
 package com.dazhi.blogprovider.util;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 import org.opencv.core.*;
-import org.opencv.imgproc.Imgproc;
-
 import java.net.URL;
 
 import static org.opencv.highgui.HighGui.imshow;
