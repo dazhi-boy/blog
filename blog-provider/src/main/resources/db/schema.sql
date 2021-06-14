@@ -1,3 +1,16 @@
+-- 用户表
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `username` varchar(30) NOT NULL COMMENT '账号',
+ `nickname` varchar(30) NOT NULL COMMENT '昵称',
+ `password` varchar(30) NOT NULL COMMENT '密码',
+ `phone` varchar (30) COMMENT '手机号',
+ `email` varchar (30) COMMENT '邮箱'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '用户表';
+
 -- 主题表
 DROP TABLE IF EXISTS `theme`;
 CREATE TABLE `theme` (
@@ -162,3 +175,15 @@ CREATE TABLE `tv_classification` (
  `level` bigint(20) NOT NULL COMMENT '层级',
  `pid` bigint(20) COMMENT '父标签'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '视频分类';
+
+-- 美食列表
+CREATE TABLE IF NOT EXISTS `food` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `name` varchar(30) NOT NULL COMMENT '食物名',
+ `description` varchar(255) NOT NULL COMMENT '描述',
+ `image` varchar(128) NOT NULL COMMENT '图片路径',
+ `type` bigint(20) NOT NULL COMMENT '分类：外卖，大餐，自己做',
+ `open_id` varchar(50) COMMENT '所属用户'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '美食列表';
