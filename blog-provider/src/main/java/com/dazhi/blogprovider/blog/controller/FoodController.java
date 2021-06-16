@@ -24,19 +24,22 @@ import java.util.List;
 @Api(value = "/blog/food", tags = "FoodController", description = "美食管理接口")
 public class FoodController extends BaseController<Food, IFoodService> {
 
-    @ApiOperation(value = "通过id获取entity和其明细")
-    @PostMapping("/byParameter")
-    public Result<List<Food>> getFoodByParameter(@RequestBody Food food) {
+    @ApiOperation(value = "通过openId随机获取今日食谱")
+    @GetMapping("/randGetFood/{openId}")
+    public Result<List<Food>> randGetFood(@PathVariable("openId") String openId) {
         IFoodService service = (IFoodService)this.iService;
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("open_id",food.getOpenId());
-        wrapper.groupBy("type");
-//        wrapper.apply("RAND()");
-
-        List<Food> one = service.list(wrapper);
-
+        List<Food> foods = service.listRandFood(openId);
         Result<List<Food>> result = Result.ok("OK");
-        result.setData(one);
+        result.setData(foods);
+        return result;
+    }
+    @ApiOperation(value = "通过openId随机获取今日食谱")
+    @GetMapping("/randFood/{openId}/{type}")
+    public Result<Food> randFood(@PathVariable("openId") String openId, @PathVariable("type") String type) {
+        IFoodService service = (IFoodService)this.iService;
+        Food food = service.listRandFood(openId, type);
+        Result<Food> result = Result.ok("OK");
+        result.setData(food);
         return result;
     }
 }

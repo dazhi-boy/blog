@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dazhi.blogprovider.blog.mapper.FoodMapper">
 
+    <select id="listRandFood" resultType="com.dazhi.blogprovider.blog.entity.Food">
+        (select * from food where type = '1' <if test="null != openId">and open_id = #{openId} </if> <if test="null == openId">and open_id is null </if>  ORDER BY RAND() LIMIT 1)
+        UNION
+        (select * from food where type = '2' <if test="null != openId">and open_id = #{openId} </if> <if test="null == openId">and open_id is null </if> ORDER BY RAND() LIMIT 1)
+        UNION
+        (select * from food where type = '3' <if test="null != openId">and open_id = #{openId} </if> <if test="null == openId">and open_id is null </if> ORDER BY RAND() LIMIT 1)
+    </select>
+    <select id="randFood" resultType="com.dazhi.blogprovider.blog.entity.Food">
+        (select * from food where type = #{type} <if test="null != openId">and open_id = #{openId} </if> <if test="null == openId">and open_id is null </if> ORDER BY RAND() LIMIT 1)
+    </select>
 </mapper>

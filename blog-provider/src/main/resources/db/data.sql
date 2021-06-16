@@ -77,8 +77,26 @@ VALUES
 ('大学单词C1', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 1);
 
 -- 美食列表
+INSERT INTO food (name, description, image, type)
+VALUES
+('锅包肉', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1),
+('麻辣烫', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1),
+('水煮鱼', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1),
+('肉丝盖饭', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2),
+('烤肉拌饭', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2),
+('肯德基汉堡', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2),
+('炒土豆', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3),
+('手撕包菜', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3),
+('炒鸡蛋', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3);
+
 INSERT INTO food (name, description, image, type, open_id)
 VALUES
-('大学单词A1', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
-('大学单词B1', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
-('大学单词C1', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw');
+('锅包肉', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('麻辣烫', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('水煮鱼', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 1, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('肉丝盖饭', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('烤肉拌饭', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('肯德基汉堡', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 2, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('炒土豆', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('手撕包菜', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
+('炒鸡蛋', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw');
