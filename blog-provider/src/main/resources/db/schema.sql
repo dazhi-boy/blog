@@ -177,7 +177,9 @@ CREATE TABLE `tv_classification` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '视频分类';
 
 -- 美食列表
-CREATE TABLE IF NOT EXISTS `food` (
+-- CREATE TABLE IF NOT EXISTS `food` (
+DROP TABLE IF EXISTS `food`;
+CREATE TABLE `food` (
  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),

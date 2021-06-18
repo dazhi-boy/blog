@@ -25,11 +25,29 @@ public class UserController extends BaseController<User, IUserService> {
 
     @ApiOperation(value = "登录")
     @PostMapping("/login")
-    public Result<User> login(@RequestBody LoginUser loginUser) {
-        IUserService iUserService = (IUserService)this.iService;
-        User user = iUserService.login(loginUser.username,loginUser.password);
+    public Result<User> login(@RequestBody LoginUser loginUser) throws InterruptedException {
+        long id = Thread.currentThread().getId();
+        System.out.println(id + "start");
+//        IUserService iUserService = (IUserService)this.iService;
+//        User user = iUserService.login(loginUser.username,loginUser.password);
         Result<User> result = Result.ok("ok");
-        result.setData(user);
+//        result.setData(user);
+        Thread.sleep(100);
+        System.out.println(id + "end");
+        return result;
+    }
+
+    @ApiOperation(value = "登录")
+    @PostMapping("/login1")
+    public Result<User> login1(@RequestBody LoginUser loginUser) throws InterruptedException {
+        long id = Thread.currentThread().getId();
+        System.out.println(id + "start-1");
+//        IUserService iUserService = (IUserService)this.iService;
+//        User user = iUserService.login(loginUser.username,loginUser.password);
+        Result<User> result = Result.ok("ok");
+//        result.setData(user);
+        Thread.sleep(100);
+        System.out.println(id + "end-1");
         return result;
     }
 }

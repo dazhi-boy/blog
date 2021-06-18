@@ -1,6 +1,7 @@
 package com.dazhi.blogprovider.blog.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dazhi.blogprovider.blog.entity.Activity;
 import com.dazhi.blogprovider.blog.entity.TvClassification;
 import com.dazhi.blogprovider.blog.service.IActivityService;
@@ -35,6 +36,18 @@ public class TvClassificationController extends BaseController<TvClassification,
     public Result<List<TvClassification>> getWithDetailByLevel(@PathVariable("themeId") Long themeId) {
         ITvClassificationService service = (ITvClassificationService)this.iService;
         List<TvClassification> tvClassifications = service.getWithDetailByLevel(themeId);
+        Result<List<TvClassification>> result = Result.ok("OK");
+        result.setData(tvClassifications);
+        return result;
+    }
+
+    @ApiOperation(value = "通过id获取entity和其明细")
+    @GetMapping("/pid/{pid}")
+    public Result<List<TvClassification>> getByPid(@PathVariable("pid") Long pid) {
+        ITvClassificationService service = (ITvClassificationService)this.iService;
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("pid",pid);
+        List<TvClassification> tvClassifications = service.list(queryWrapper);
         Result<List<TvClassification>> result = Result.ok("OK");
         result.setData(tvClassifications);
         return result;
