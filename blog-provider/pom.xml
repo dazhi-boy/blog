@@ -88,7 +88,7 @@
         </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.opencv/opencv -->
         <!-- https://mvnrepository.com/artifact/org.bytedeco.javacpp-presets/opencv -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.bytedeco.javacpp-presets</groupId>
             <artifactId>opencv</artifactId>
             <version>4.0.1-1.4.4</version>
@@ -97,7 +97,7 @@
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-native-platform</artifactId>
             <version>1.0.0-beta6</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

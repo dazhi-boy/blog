@@ -5,8 +5,8 @@ import Add from '@/components/Add'
 import Me from '@/components/Me'
 import List from '@/components/List'
 import Detail from '@/components/Detail'
-import Tutorial from '@/components/Tutorial'
-import TutorialDetail from '@/components/TutorialDetail'
+import Tutorial from '@/components/video/Tutorial'
+import TutorialDetail from '@/components/video/TutorialDetail'
 
 Vue.use(Router)
 

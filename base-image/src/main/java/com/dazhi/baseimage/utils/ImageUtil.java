@@ -1,4 +1,4 @@
-package com.dazhi.blogprovider.util;
+package com.dazhi.baseimage.utils;
 
 import org.opencv.core.*;
 import java.net.URL;

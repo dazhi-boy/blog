@@ -1,4 +1,4 @@
-package com.dazhi.blogprovider.img.filter;
+package com.dazhi.baseimage.filter;
 
 import com.sun.javafx.geom.Vec4d;
 import org.bytedeco.javacpp.opencv_core;
