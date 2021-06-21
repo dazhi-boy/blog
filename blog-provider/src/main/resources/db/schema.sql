@@ -189,3 +189,16 @@ CREATE TABLE `food` (
  `type` bigint(20) NOT NULL COMMENT '分类：外卖，大餐，自己做',
  `open_id` varchar(50) COMMENT '所属用户'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '美食列表';
+
+-- 单词表
+CREATE TABLE IF NOT EXISTS `word` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `term` varchar(30) NOT NULL UNIQUE COMMENT '词',
+ `translate` varchar(30) NOT NULL UNIQUE COMMENT '翻译',
+ `status` varchar(10) COMMENT '状态',
+ `frequency` integer COMMENT '出现次数',
+ `grade` varchar(10) COMMENT '级别',
+ `user_id` bigint(20) COMMENT '所属用户'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '单词表';
