@@ -100,3 +100,22 @@ VALUES
 ('炒土豆', '大学单词A1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
 ('手撕包菜', '大学单词B1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw'),
 ('炒鸡蛋', '大学单词C1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg', 3, 'oaonk5BsCyJ333H3sgy-CZWPjGGw');
+
+INSERT INTO word_grade (code, grade, image)
+VALUES
+('primary', '小学', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('middle', '初中', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior1', '高中1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior2', '高中2', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior3', '高中3', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior4', '高中4', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior5', '高中5', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior6', '高中6', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior7', '高中7', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior8', '高中8', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior9', '高中9', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior10', '高中10', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('senior11', '高中11', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('college1', '大学1', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('college2', '大学2', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'),
+('college3', '大学3', 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg');

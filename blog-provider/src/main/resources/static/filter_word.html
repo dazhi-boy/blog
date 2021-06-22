@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超级大魔王</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <input id="grade" name="grade" placeholder="等级" value="primary" \>
+        <input id="userId" name="userId" placeholder="用户id"\>
+        <button onclick="init()">初始化我的数据</button>
+        <button onclick="begain()">开始筛选</button>
+        <span id="show_count"></span>
+        <a href="./index.html">我去记单词</a>
+    </div>
+    <!--显示单词-->
+    <span hidden id="wordId"></span>
+    <h1 id="word"></h1>
+    <!--显示读音-->
+    <div>
+        <audio src="https://www.w3school.com.cn/i/song.mp3" controls id="audio" autoplay>low browsers not support</audio>
+    </div>
+
+    <button onclick="ans()">答案</button>
+    <!--下一个-->
+    <button onclick="next()">下一个</button>
+    <!--请求后台将单词标记为记住，显示下一个-->
+    <button onclick="easy()">so easy</button>
+    <!--点击显示翻译和图片-->
+    <h1 id="translate" hidden></h1>
+    <div>
+        <iframe id="idSign" src="" width="1200px" height="600px"></iframe>
+    </div>
+</div>
+<div class="foot">http://localhost:8888/filter_word.html</div>
+</body>
+
+<script>
+
+    function init() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "/core/word/initWord/"+grade+"/"+userId;
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                alert(result.msg);
+            }
+        });
+    }
+    
+    var words = [];
+    var index = 0;
+    
+    function begain() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "/core/word/getWordsByGrade/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                console.log(result.data);
+                var word = result.data[0];
+                $("#wordId").html(word.id);
+                $("#word").html(word.term);
+                $("#audio").attr('src',"/music/" + grade + "/" + word.term + ".mp3");
+                $("#translate").html(word.translate);
+                $("#translate").hide();
+                $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+word.term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
+                $("#idSign").hide();
+                words = result.data;
+                return words;
+            }
+        });
+        var count_url = "/core/word/count/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: count_url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                $("#show_count").html(result.data);
+            }
+        });
+    }
+
+    function next() {
+        // alert(words[index].term);
+        var grade = $("#grade").val();
+        index = index + 1;
+        $("#wordId").html(words[index].id);
+        $("#word").html(words[index].term);
+        $("#audio").attr('src',"/music/" + grade + "/" + words[index].term + ".mp3");
+        $("#translate").html(words[index].translate);
+        $("#translate").hide();
+        $("#idSign").attr('src', "https://cn.bing.com/images/async?q="+words[index].term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7");
+        $("#idSign").hide();
+    }
+
+    function ans() {
+        $("#translate").show();
+        $("#idSign").show();
+    }
+    
+    function easy() {
+        var wordId = $("#wordId").html();
+        var URL= "/core/word";
+        var data = words[index];
+        data.status = 1;
+        console.log(data);
+        $.ajax({
+            type: "PUT",
+            url: URL,
+            data: JSON.stringify(data),
+            dataType: "JSON",
+            async: false,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function(result) {
+                console.log(result)
+            }
+        });
+        next();
+    }
+
+</script>
+
+<style>
+    h1 {font-size:250%;}
+    body {
+        text-align:center
+    }
+    element.style {
+        float: left;
+    !important
+    }
+    .foot{ position:fixed; left:0px; bottom:0px;  width:100%; height: 50px; z-index:999;}
+</style>
+</html>
