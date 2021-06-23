@@ -33,7 +33,7 @@ public class Word extends BaseEntity {
     private String grade;
 
     @ApiModelProperty(value = "所属用户")
-    private Long userId;
+    private String userId;
 
     public String getTerm() {
         return term;
@@ -71,11 +71,11 @@ public class Word extends BaseEntity {
     public void setGrade(String grade) {
         this.grade = grade;
     }
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

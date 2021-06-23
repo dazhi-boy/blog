@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `word` (
  `status` varchar(10) COMMENT '状态',
  `frequency` integer COMMENT '出现次数',
  `grade` varchar(10) COMMENT '级别',
- `user_id` bigint(20) COMMENT '所属用户'
+ `user_id` varchar(30) COMMENT '所属用户'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '单词表';
 
 -- 单词等级

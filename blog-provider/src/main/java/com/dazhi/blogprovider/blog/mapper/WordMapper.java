@@ -14,5 +14,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface WordMapper extends BaseMapper<Word> {
 
-    void initWord(@Param("grade") String grade, @Param("userId") Long userId);
+    void initWord(@Param("grade") String grade, @Param("userId") String userId);
 }

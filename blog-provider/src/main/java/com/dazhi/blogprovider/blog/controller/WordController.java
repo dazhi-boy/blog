@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -22,8 +23,8 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/core/word")
-@Api(value = "/core/word", tags = "WordController", description = "单词管理接口")
+@RequestMapping("blog/word")
+@Api(value = "blog/word", tags = "WordController", description = "单词管理接口")
 public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/init")
@@ -52,7 +53,7 @@ public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/initTree/{grade}/{userId}")
     @ApiOperation(value = "初始化单词树")
-    public Result initTree(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) throws IOException {
+    public Result initTree(@PathVariable("grade") String grade, @PathVariable("userId") String userId) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
         iWordService.initTree(grade, userId);
         return Result.ok("初始化单词树");
@@ -60,7 +61,7 @@ public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/getBatch/{userId}")
     @ApiOperation(value = "获取一批单词")
-    public Result<Word> getBatch(@PathVariable("userId") Long userId) throws IOException {
+    public Result<Word> getBatch(@PathVariable("userId") String userId) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
         Word word = iWordService.getBatch(userId);
 
@@ -79,7 +80,7 @@ public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/initWord/{grade}/{userId}")
     @ApiOperation(value = "初始化自己需要记的所有的单词")
-    public Result<List<Word>> initWord(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
+    public Result<List<Word>> initWord(@PathVariable("grade") String grade, @PathVariable("userId") String userId) {
         String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
                 "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
         /*QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
@@ -94,6 +95,17 @@ public class WordController extends BaseController<Word, IWordService> {
         IWordService iWordService = (IWordService) super.iService;
         iWordService.initWord(grade,userId);
         return Result.ok("搞定");
+    }
+
+    @PostMapping("/initAndGetWords")
+    @ApiOperation(value = "获取没记住的所有的单词")
+    public Result<List<Word>> initAndGetWords(@RequestBody Map<String, Object> data) {
+        System.out.println(data.get("grade")+"-----"+data.get("userId"));
+        IWordService iWordService = (IWordService) super.iService;
+        List<Word> wordList = iWordService.initAndGetWords(data.get("grade").toString(),data.get("userId").toString());
+        Result<List<Word>> result = Result.ok("OK");
+        result.setData(wordList);
+        return result;
     }
 
     @GetMapping("/getWordsByGrade/{grade}/{userId}")

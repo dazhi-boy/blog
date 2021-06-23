@@ -159,7 +159,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
-    public void initTree(String grade, Long userId) {
+    public void initTree(String grade, String userId) {
         //查询所有的单词
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
@@ -218,7 +218,7 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
-    public void initWord(String grade, Long userId) {
+    public void initWord(String grade, String userId) {
         String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
                 "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
         WordMapper wordMapper = super.baseMapper;
@@ -226,7 +226,23 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
     }
 
     @Override
-    public Word getBatch(Long userId) {
+    public List<Word> initAndGetWords(String grade, String userId) {
+        // 获取数据
+        QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
+        List<Word> wordList = this.baseMapper.selectList(queryWrapper);
+
+        if (wordList.size()==0) {
+            // 没有初始化，开始初始化
+            super.baseMapper.initWord(grade,userId);
+            // 获取数据
+            wordList = this.baseMapper.selectList(queryWrapper);
+        }
+        return wordList;
+    }
+
+    @Override
+    public Word getBatch(String userId) {
         Queue<Word> wordQueue = CoreCache.WORD_QUEUE.get(userId);
         return wordQueue.poll();
     }

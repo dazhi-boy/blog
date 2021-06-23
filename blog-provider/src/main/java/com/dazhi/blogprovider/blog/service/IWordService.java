@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dazhi.blogprovider.blog.entity.Word;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <p>
@@ -21,9 +22,11 @@ public interface IWordService extends IService<Word> {
 
     void initMusic();
 
-    Word getBatch(Long userId);
+    Word getBatch(String userId);
 
-    void initTree(String grade, Long userId);
+    void initTree(String grade, String userId);
 
-    void initWord(String grade, Long userId);
+    void initWord(String grade, String userId);
+
+    List<Word> initAndGetWords(String grade, String userId);
 }

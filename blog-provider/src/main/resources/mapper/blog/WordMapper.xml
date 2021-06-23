@@ -6,4 +6,5 @@
         INSERT INTo word (version,term,translate,`grade`,user_id)
         (SELECT version,term,translate,`grade`,#{userId} FROM word WHERE grade = #{grade} and user_id is null)
     </insert>
+
 </mapper>

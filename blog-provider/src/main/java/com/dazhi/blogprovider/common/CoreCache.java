@@ -18,11 +18,11 @@ import java.util.concurrent.ConcurrentMap;
 public class CoreCache {
 
     // 用于存储用户记忆单词的次数
-    public static ConcurrentMap<Long, WordTree> WORD_TREE_CACHE = new ConcurrentHashMap<>();
+    public static ConcurrentMap<String, WordTree> WORD_TREE_CACHE = new ConcurrentHashMap<>();
     // 用于记录当前level
-    public static ConcurrentMap<Long, Integer> CURRENT_LEVEL = new ConcurrentHashMap<>();
+    public static ConcurrentMap<String, Integer> CURRENT_LEVEL = new ConcurrentHashMap<>();
     // 用于记录所有计划好的单词
-    public static ConcurrentMap<Long, Queue<Word>> WORD_QUEUE = new ConcurrentHashMap<>();
+    public static ConcurrentMap<String, Queue<Word>> WORD_QUEUE = new ConcurrentHashMap<>();
     // 单词缓存
     public static ConcurrentMap<String, List<Word>> WORDS = new ConcurrentHashMap<>();
 
