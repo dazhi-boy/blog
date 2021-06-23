@@ -21,7 +21,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    initialization-mode: always
+    initialization-mode: EMBEDDED
     schema: classpath:db/schema.sql
     data: classpath:db/data.sql
     url: jdbc:mysql://154.8.146.181:3306/blog?characterEncoding=UTF8

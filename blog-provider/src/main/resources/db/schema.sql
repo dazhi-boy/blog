@@ -151,8 +151,8 @@ CREATE TABLE `activity_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '活动图文介绍';
 
 -- 教学视频
-DROP TABLE IF EXISTS `tutorial_tv`;
-CREATE TABLE `tutorial_tv` (
+-- DROP TABLE IF EXISTS `tutorial_tv`;
+CREATE TABLE IF NOT EXISTS `tutorial_tv` (
  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),
@@ -164,8 +164,8 @@ CREATE TABLE `tutorial_tv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '教学视频';
 
 -- 视频分类
-DROP TABLE IF EXISTS `tv_classification`;
-CREATE TABLE `tv_classification` (
+-- DROP TABLE IF EXISTS `tv_classification`;
+CREATE TABLE IF NOT EXISTS `tv_classification` (
  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),
@@ -178,8 +178,8 @@ CREATE TABLE `tv_classification` (
 
 -- 美食列表
 -- CREATE TABLE IF NOT EXISTS `food` (
-DROP TABLE IF EXISTS `food`;
-CREATE TABLE `food` (
+-- DROP TABLE IF EXISTS `food`;
+CREATE TABLE IF NOT EXISTS `food` (
  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),
@@ -189,3 +189,26 @@ CREATE TABLE `food` (
  `type` bigint(20) NOT NULL COMMENT '分类：外卖，大餐，自己做',
  `open_id` varchar(50) COMMENT '所属用户'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '美食列表';
+
+-- 单词表
+CREATE TABLE IF NOT EXISTS `word` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `term` varchar(30) NOT NULL UNIQUE COMMENT '词',
+ `translate` varchar(30) NOT NULL UNIQUE COMMENT '翻译',
+ `status` varchar(10) COMMENT '状态',
+ `frequency` integer COMMENT '出现次数',
+ `grade` varchar(10) COMMENT '级别',
+ `user_id` varchar(30) COMMENT '所属用户'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '单词表';
+
+-- 单词等级
+CREATE TABLE IF NOT EXISTS `word_grade` (
+ `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+ `version` bigint(20) NOT NULL DEFAULT 0,
+ `del_time` varchar(30),
+ `code` varchar(30) NOT NULL UNIQUE COMMENT '级别key',
+ `grade` varchar(30) NOT NULL UNIQUE COMMENT '级别',
+ `image` varchar(128) NOT NULL COMMENT '图片路径'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '单词等级';

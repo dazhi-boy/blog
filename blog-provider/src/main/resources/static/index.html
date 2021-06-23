@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8"> 
+    <title>宇宙无敌</title> 
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+</head>
+<body>
+<div>
+    <input id="grade" name="grade" placeholder="等级" value="primary" \>
+    <input id="userId" name="userId" placeholder="用户id"\>
+    <button onclick="init_word_list()">初始化单词树</button>
+    <a href="./filter_word.html">筛查没记住的单词</a>
+</div>
+<div>
+<h1 id="enword">皮一下,很开心</h1>
+<h1 id="chword">皮一下，很开心</h1>
+<audio src="https://www.w3school.com.cn/i/song.mp3" controls id="audio">low browsers not support</audio>
+
+<!--<span id="bf" onclick="bf();">播放/暂停</span>-->
+
+<span id="bbb" onclick="bbb();">开始</span>
+<span id="ccc" onclick="ccc();" hidden>暂停</span>
+
+</div>
+<iframe id="idSign" src="https://cn.bing.com/images/search?q=dog&form=QBIR&first=1&tsc=ImageBasicHover" width="1200px" height="600px"></iframe>
+
+</body>
+
+
+
+<script>
+
+    function init_word_list() {
+        var grade = $("#grade").val();
+        var userId = $("#userId").val();
+        var url = "/core/word/initTree/"+grade+"/"+userId;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                // var data = [];
+                // data = result.data;
+                // alert(result.msg)
+                init();
+            }
+        });
+    }
+
+    function init() {
+        var userId = $("#userId").val();
+        // for (var i=0;i<2;i++) {
+            var data;
+            $.ajax({
+                type: "GET",
+                url: "/core/word/getBatch/"+userId,
+                data: {},
+                dataType: "JSON",
+                async: false,
+                success: function(result) {
+                    // var data = [];
+                    data = result.data;
+
+                }
+            });
+            if(data == null || data == undefined || data == ""){
+                init_word_list();
+            }
+
+            $("#enword").html(data.term);
+            $("#chword").html(data.translate);
+                bbf(data.term);
+        // }
+    }
+
+    function initWord (cb) {
+        var data = [];
+        $.ajax({
+            type: "GET",
+            url: "/core/word/getBatch",
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                data = result.data;
+                console.log(result.data);
+            }
+        });
+    }
+
+    function bf(){
+
+        var audio = document.getElementById('audio');
+        if (audio !== null) {
+            //检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+            if (audio.paused) {
+                audio.play();//audio.play();// 这个就是播放
+            } else {
+                audio.pause();// 这个就是暂停
+            }
+        }
+    }
+
+    function bbf(term){
+        // var audio = document.getElementById('idSign');
+        // audio.src = "https://cn.bing.com/images/async?q=banana&first=43&count=35&relp=35&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1";
+        //改变图片
+        var grade = $("#grade").val();
+        var idSign = document.getElementById('idSign');
+        idSign.src = "https://cn.bing.com/images/async?q="+term+"&first=20&count=20&relp=20&tsc=ImageBasicHover&datsrc=I&layout=RowBased&mmasync=1&dgState=x*0_y*0_h*0_c*5_i*36_r*7";
+
+        //http://localhost:8888/music/actor.mp3
+
+        var audio = document.getElementById('audio');
+        audio.pause();
+        audio.src = "/music/" + grade + "/" + term + ".mp3";
+        audio.play();
+    }
+    function getWord(bbf) {
+        var userId = $("#userId").val();
+        $.ajax({
+            type: "GET",
+            url: "/core/word/getBatch/"+userId,
+            data: {},
+            dataType: "JSON",
+            async: false,
+            success: function(result) {
+                bbf(result.data);
+            }
+        });
+    }
+    var interval;
+
+    function bbb(){
+        $("#bbb").hide();
+        $("#ccc").show();
+        interval = setInterval("init()","3000");
+    }
+
+    function ccc(){
+        $("#ccc").hide();
+        $("#bbb").show();
+        clearInterval(interval );//停止
+    }
+
+</script>
+<style>
+    h1 {font-size:250%;}
+    body {
+        text-align:center
+    }
+    element.style {
+        float: left;
+        !important
+    }
+</style>
+</html>
