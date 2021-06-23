@@ -3,7 +3,7 @@
 <mapper namespace="com.dazhi.blogprovider.blog.mapper.WordMapper">
 
     <insert id="initWord">
-        INSERT INTo word (version,term,translate,`grade`,user_id)
+        INSERT INTO word (version,term,translate,`grade`,user_id)
         (SELECT version,term,translate,`grade`,#{userId} FROM word WHERE grade = #{grade} and user_id is null)
     </insert>
 

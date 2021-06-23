@@ -105,7 +105,7 @@ h4 {
   overflow-y: auto;
 }
 .nowrap{
-  width: 50%;
+  width: 47vw;
   height: 10rem;
   padding: 1vw;
 }
