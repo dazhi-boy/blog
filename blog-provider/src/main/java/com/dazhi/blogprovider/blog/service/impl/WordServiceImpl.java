@@ -1,6 +1,8 @@
 package com.dazhi.blogprovider.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dazhi.blogprovider.blog.entity.Word;
 import com.dazhi.blogprovider.blog.entity.WordTree;
@@ -227,17 +229,19 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
 
     @Override
     public List<Word> initAndGetWords(String grade, String userId) {
+        QueryWrapper<Word> countWrapper = new QueryWrapper<>();
+        countWrapper.eq("grade",grade).eq("user_id",userId);
+        int unremember = this.baseMapper.selectCount(countWrapper);
+        if (unremember==0) {
+            // 没有初始化，开始初始化
+            super.baseMapper.initWord(grade,userId);
+        }
         // 获取数据
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
-        List<Word> wordList = this.baseMapper.selectList(queryWrapper);
-
-        if (wordList.size()==0) {
-            // 没有初始化，开始初始化
-            super.baseMapper.initWord(grade,userId);
-            // 获取数据
-            wordList = this.baseMapper.selectList(queryWrapper);
-        }
+        IPage<Word> page = new Page<>(1,200);
+        IPage<Word> wordIPage = this.baseMapper.selectPage(page, queryWrapper);
+        List<Word> wordList = wordIPage.getRecords();
         return wordList;
     }
 
