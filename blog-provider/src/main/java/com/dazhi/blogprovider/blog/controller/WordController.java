@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,19 +52,19 @@ public class WordController extends BaseController<Word, IWordService> {
         return Result.ok("初始化读音");
     }
 
-    @GetMapping("/initTree/{grade}/{userId}")
+    @PostMapping("/initTree")
     @ApiOperation(value = "初始化单词树")
-    public Result initTree(@PathVariable("grade") String grade, @PathVariable("userId") String userId) throws IOException {
+    public Result initTree(@RequestBody Map<String, Object> data) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
-        iWordService.initTree(grade, userId);
+        iWordService.initTree(data.get("grade").toString(), data.get("userId").toString());
         return Result.ok("初始化单词树");
     }
 
-    @GetMapping("/getBatch/{userId}")
+    @PostMapping("/getBatch")
     @ApiOperation(value = "获取一批单词")
-    public Result<Word> getBatch(@PathVariable("userId") String userId) throws IOException {
+    public Result<Word> getBatch(@RequestBody Map<String, Object> data) throws IOException {
         IWordService iWordService = (IWordService) super.iService;
-        Word word = iWordService.getBatch(userId);
+        Word word = iWordService.getBatch(data.get("userId").toString());
 
 //        IPage<Word> page = new Page<>(1, 5);
 //
@@ -122,7 +123,7 @@ public class WordController extends BaseController<Word, IWordService> {
 
     @GetMapping("/count/{grade}/{userId}")
     @ApiOperation(value = "获取没记住的所有的单词")
-    public Result<String> count(@PathVariable("grade") String grade, @PathVariable("userId") Long userId) {
+    public Result<Map> count(@PathVariable("grade") String grade, @PathVariable("userId") String userId) {
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
         IWordService iWordService = (IWordService) super.iService;
@@ -130,8 +131,11 @@ public class WordController extends BaseController<Word, IWordService> {
         QueryWrapper<Word> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("grade",grade).eq("user_id",userId).eq("status","1");
         int remember = iWordService.count(queryWrapper1);
-        Result<String> result = Result.ok("OK");
-        result.setData("未记住："+unremember+ " -- 已记住："+ remember);
+        Map<String,Integer> data = new HashMap<>();
+        data.put("remembered",remember);
+        data.put("unremembered",unremember);
+        Result<Map> result = Result.ok("OK");
+        result.setData(data);
         return result;
     }
 
