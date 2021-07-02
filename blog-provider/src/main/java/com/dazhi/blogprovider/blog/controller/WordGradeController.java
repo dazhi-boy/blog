@@ -42,13 +42,25 @@ public class WordGradeController extends BaseController<WordGrade, IWordGradeSer
     @GetMapping("/initImg")
     @ApiOperation(value = "初始化图片")
     public Result initImg() {
-        String grade = "primary";
+//        String grade = "primary";//小学
+//        String grade = "middle";//初中
+//        String grade = "senior1";//高中1
+//        String grade = "senior2";//高中2
+//        String grade = "senior3";//高中3
+//        String grade = "senior4";//高中4
+//        String grade = "senior5";//高中5
+//        String grade = "senior6";//高中6
+//        String grade = "senior7";//高中7
+        String grade = "senior8";//高中8
+//        String grade = "senior9";//高中9
+//        String grade = "senior10";//高中10
+//        String grade = "senior11";//高中11
         QueryWrapper<Word> queryWrapper = new QueryWrapper();
         queryWrapper.eq("grade",grade);
         queryWrapper.isNull("user_id");
         queryWrapper.isNull("status");
         List<Word> list = iWordService.list(queryWrapper);
-        for (int i = 271; i<list.size();i++) {
+        for (int i = 0; i<60;i++) {
             Word word = list.get(i);
             String term = word.getTerm().trim();
             String path = "D:\\word\\"+grade+"\\"+term;

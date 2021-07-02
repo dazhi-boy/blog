@@ -1,24 +1,24 @@
 package com.dazhi.baseprovider.config;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import springfox.documentation.RequestHandler;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//import com.google.common.base.Function;
+//import com.google.common.base.Optional;
+//import com.google.common.base.Predicate;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import springfox.documentation.RequestHandler;
+//import springfox.documentation.builders.ApiInfoBuilder;
+//import springfox.documentation.builders.PathSelectors;
+//import springfox.documentation.service.ApiInfo;
+//import springfox.documentation.service.Contact;
+//import springfox.documentation.spi.DocumentationType;
+//import springfox.documentation.spring.web.plugins.Docket;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration
-@EnableSwagger2
+//@Configuration
+//@EnableSwagger2
 public class SwaggerApp {
     // 定义分隔符
-    private static final String splitor = ";";
+    /*private static final String splitor = ";";
 
     @Bean
     public Docket createRestApi() {// 创建API基本信息
@@ -61,7 +61,7 @@ public class SwaggerApp {
 
     private static Optional<? extends Class<?>> declaringClass(RequestHandler input) {
         return Optional.fromNullable(input.getHandlerMethod().getMethod().getDeclaringClass());
-    }
+    }*/
 
     /**
      * swagger2原始ui

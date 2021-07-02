@@ -1,15 +1,15 @@
 http:
-  port: 80
+  port: 8081
 #https端口号.
-server:
-  port: 443
+#server:
+#  port: 443
   #证书的路径.
-  ssl:
-    key-store: classpath:dazhi123.top.jks
+#  ssl:
+#    key-store: classpath:dazhi123.top.jks
     #证书密码，请修改为您自己证书的密码.
-    key-store-password: zxcv1234
+#    key-store-password: zxcv1234
     #秘钥库类型
-    keyStoreType: JKS
+#    keyStoreType: JKS
     #证书别名
 #    keyAlias: 大智小站
 # keytool -genkey -alias tomcat -dname "CN=Dazhi,OU=大智的小站,O=大智Demo,L=HaiDian,ST=BeiJing,C=CN" -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365

@@ -1,6 +1,6 @@
 -- 用户表
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+-- DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
  `id` bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `version` bigint(20) NOT NULL DEFAULT 0,
  `del_time` varchar(30),

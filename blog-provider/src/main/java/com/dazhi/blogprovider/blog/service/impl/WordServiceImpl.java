@@ -221,21 +221,22 @@ public class WordServiceImpl extends ServiceImpl<WordMapper, Word> implements IW
 
     @Override
     public void initWord(String grade, String userId) {
-        String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
-                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
-        WordMapper wordMapper = super.baseMapper;
-        wordMapper.initWord(grade,userId);
+//        String sql = "INSERT INTo word (version,term,translate,`grade`,user_id) " +
+//                "(SELECT version,term,translate,`grade`,'"+userId+"' FROM word WHERE grade = '"+grade+"' and user_id is null)";
+        QueryWrapper<Word> countWrapper = new QueryWrapper<>();
+        countWrapper.eq("grade",grade).eq("user_id",userId);
+        int count = this.baseMapper.selectCount(countWrapper);
+        if (count==0) {
+            // 没有初始化，开始初始化
+            this.baseMapper.initWord(grade,userId);
+        }
+
+//        WordMapper wordMapper = super.baseMapper;
+//        wordMapper.initWord(grade,userId);
     }
 
     @Override
     public List<Word> initAndGetWords(String grade, String userId) {
-        QueryWrapper<Word> countWrapper = new QueryWrapper<>();
-        countWrapper.eq("grade",grade).eq("user_id",userId);
-        int unremember = this.baseMapper.selectCount(countWrapper);
-        if (unremember==0) {
-            // 没有初始化，开始初始化
-            super.baseMapper.initWord(grade,userId);
-        }
         // 获取数据
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");

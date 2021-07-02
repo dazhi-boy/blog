@@ -124,9 +124,9 @@ public class WordController extends BaseController<Word, IWordService> {
     @GetMapping("/count/{grade}/{userId}")
     @ApiOperation(value = "获取没记住的所有的单词")
     public Result<Map> count(@PathVariable("grade") String grade, @PathVariable("userId") String userId) {
+        IWordService iWordService = (IWordService) super.iService;
         QueryWrapper<Word> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("grade",grade).eq("user_id",userId).isNull("status");
-        IWordService iWordService = (IWordService) super.iService;
         int unremember = iWordService.count(queryWrapper);
         QueryWrapper<Word> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("grade",grade).eq("user_id",userId).eq("status","1");

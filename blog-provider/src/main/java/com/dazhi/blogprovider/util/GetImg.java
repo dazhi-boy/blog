@@ -37,8 +37,8 @@ public class GetImg {
         if (!file.exists()) {
             file.mkdirs();
         }
-        for (int i = 0; i<10;i++) {
-            Thread.sleep(1000);
+        for (int i = 0; i<6;i++) {
+//            Thread.sleep(1000);
             Element postItem = postItems.get(i);
             //像jquery选择器一样，获取文章标题元素
 //            Elements titleEle = postItem.select(".post_item_body a[class='titlelnk']");
