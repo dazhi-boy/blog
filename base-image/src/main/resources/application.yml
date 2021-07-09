@@ -12,4 +12,4 @@ spring:
     static-locations:
       - file:${upload-path}
 upload-path: /root/public/
-upload-ip: 154.8.146.181
+upload-ip: localhost

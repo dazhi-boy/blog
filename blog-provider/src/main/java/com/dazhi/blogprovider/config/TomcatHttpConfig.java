@@ -7,9 +7,9 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class TomcatHttpConfig {
-    @Value("${http.port}")
+    /*@Value("${http.port}")
     private Integer port;
     @Bean
     public ServletWebServerFactory servletContainer() {
@@ -18,5 +18,5 @@ public class TomcatHttpConfig {
     connector.setPort(port);
     tomcatServletWebServerFactory.addAdditionalTomcatConnectors(connector);
     return tomcatServletWebServerFactory;
-    }
+    }*/
 }
