@@ -1,0 +1,22 @@
+<!--pages/word/exclude/exclude.wxml-->
+<view class="messages">
+  <text class="message">←认识的左滑</text>
+  <text class="message">点击查看</text>
+  <text class="message">不认识的右滑→</text>
+</view>
+<view class="word" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+  <text class="term">{{words[index].term}}</text>
+
+  <view class="{{showView?'header_view_show':'header_view_hide'}}">
+    <text class="translate">{{words[index].translate}}</text>
+  </view>
+
+  <view class="changeBut" bindtap="onChangeShowState">
+    <view class="{{showView?'wordImage':'header_view_hide'}}" wx:key="{{this}}" wx:for="{{6}}" wx:for-index="key" wx:for-item="value">
+      <image src="{{basePath}}/{{code}}/{{words[index].term}}/{{key}}.jpg"></image>
+    </view>
+  </view>
+</view>
+<!-- <tabBar></tabBar> -->
+
+<!-- <view catchtouchstart='touchStart' catchtouchend="touchEnd"></view> -->

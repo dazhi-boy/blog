@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/word/word",
+    "pages/word/exclude/exclude",
+    "pages/word/grade/grade",
+    "pages/word/memory/memory"
+  ],
+  "window": {
+    "backgroundColor": "#F0F0F0",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#EEE0E5",
+    "navigationBarTitleText": "天天记单词",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

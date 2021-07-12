@@ -1,0 +1,12 @@
+<!--pages/word/word.wxml-->
+<view class="grades">
+  <view class="grade" wx:for="{{grades}}"
+  wx:for-index="index" 
+  wx:for-item="item"
+  data-code="{{item.code}}"
+  data-name="{{item.grade}}"
+  bindtap="_toGrade">
+    <image src="{{item.image}}"></image>
+    <text>{{item.grade}}</text>
+  </view>
+</view>

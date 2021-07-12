@@ -1,0 +1,50 @@
+/* pages/word/exclude/exclude.wxss */
+.messages {
+  width: 100vw;
+  height: 2vh;
+  display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-center;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(235, 247, 237);
+  color: #888;
+}
+.message{
+  box-sizing: border-box;
+}
+
+.word {
+  text-align: center;
+  padding-top: 5vh;
+}
+.term {
+  font-size: 3rem;
+  display: block;
+}
+.translate {
+  font-size: 2rem;
+  display: block;
+}
+.header_view_hide{
+  display: none;
+}
+
+.header_view_show{
+  display: block;
+}
+.changeBut {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 70vh;
+  background-color: blanchedalmond;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wordImage image{
+  width: 48vw;
+  height: 20vh;
+  margin: 1vw;
+}

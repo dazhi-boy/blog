@@ -1,0 +1,35 @@
+/* pages/word/grade/grade.wxss */
+.title {
+  width: 100vw;
+  height: 10vh;
+  background-color: rgb(228, 245, 187);
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 10vh;
+}
+.event {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+.event view {
+  width: 48vw;
+  height: 43vh;
+  margin: 1vh 1vw;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 45vh;
+}
+.remed {
+  background-color: rgb(131, 247, 131);
+}
+.unremed {
+  background-color: rgb(255, 136, 136);
+}
+.exclude {
+  background-color: rgb(158, 181, 252);
+}
+.remember {
+  background-color: rgb(255, 184, 219);
+}

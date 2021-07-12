@@ -1,0 +1,8 @@
+<!--pages/word/grade/grade.wxml-->
+<view class="title">{{name}}</view>
+<view class="event">
+  <view class="remed">已记住{{data.remembered}}</view>
+  <view class="unremed">未记住{{data.unremembered}}</view>
+  <view class="exclude" bindtap="exclude" data-code="{{code}}">去筛选</view>
+  <view class="remember" bindtap="remember" data-code="{{code}}">去记忆</view>
+</view>

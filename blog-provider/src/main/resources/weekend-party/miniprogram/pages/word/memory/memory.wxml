@@ -1,0 +1,14 @@
+<!--pages/word/memory/memory.wxml-->
+<view class="word">
+  <text class="term">{{word.term}}</text>
+
+  <view class="header_view_show">
+    <text class="translate">{{word.translate}}</text>
+  </view>
+
+  <view class="changeBut">
+    <view class="wordImage" wx:key="{{this}}" wx:for="{{6}}" wx:for-index="key" wx:for-item="value">
+      <image src="{{basePath}}/{{code}}/{{word.term}}/{{key}}.jpg"></image>
+    </view>
+  </view>
+</view>

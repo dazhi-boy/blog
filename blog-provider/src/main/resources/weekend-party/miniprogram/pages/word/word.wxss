@@ -1,0 +1,19 @@
+/* pages/word/word.wxss */
+.grades {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+.grade {
+  width: 48vw;
+  height: 25vh;
+  padding: 1vw;
+}
+.grade image {
+  width: 48vw;
+  height: 20vh;
+}
+text {
+  display: block;
+}
